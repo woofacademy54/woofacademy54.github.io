@@ -350,34 +350,51 @@ a:hover {
     transform: scale(1);
 }
 
-/* Bandeau Disclaimer Juridique */
+/* ── DISCLAIMER UNIFIÉ ─────────────────────────────────────────────── */
+/* Utilisé sur toutes les pages via .woof-disclaimer                   */
+.woof-disclaimer,
 .disclaimer-banner {
     background: linear-gradient(90deg, var(--bg-tertiary), var(--bg-secondary));
-    border-bottom: 1px solid var(--neon-cyan-soft);
-    padding: var(--space-sm) var(--space-lg);
+    border-top: 1px solid var(--neon-cyan-soft);
+    padding: 10px var(--space-lg);
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
-.disclaimer-banner .disclaimer-icon {
+.woof-disclaimer::before,
+.disclaimer-banner::before {
+    content: '\f05a';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
     color: var(--neon-cyan);
-    margin-right: var(--space-sm);
+    font-size: 0.85rem;
 }
 
+.woof-disclaimer strong,
 .disclaimer-banner strong {
     color: var(--neon-cyan);
 }
 
+.woof-disclaimer a,
 .disclaimer-banner a {
     color: var(--neon-magenta);
     text-decoration: underline;
+    white-space: nowrap;
 }
 
+.woof-disclaimer a:hover,
 .disclaimer-banner a:hover {
     color: var(--neon-cyan);
 }
+
+/* Icône explicite dans le HTML (gardée pour compat) */
+.disclaimer-banner .disclaimer-icon { display: none; }
 
 .nav-main {
     display: flex;
