@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Pro - Woof Academy Network</title>
+    <meta name="description" content="Espace professionnel Woof Academy. Formations, certifications et ressources pour les éducateurs canins.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg0: #070a0f;
+            --bg1: #0b1020;
+            --text: #eaf0ff;
+            --muted: rgba(234,240,255,.62);
+
+            --blue: #23b7ff;
+            --green: #30ff8a;
+            --pink: #ff4fd8;
+            --cyan: #47f4ff;
+
+            --r: 18px;
+            --pad: 22px;
+            --stroke: 2px;
+
+            --shadow: 0 18px 55px rgba(0,0,0,.55);
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(1200px 800px at 20% 10%, rgba(35,183,255,.14), transparent 55%),
+                radial-gradient(900px 700px at 70% 70%, rgba(48,255,138,.10), transparent 60%),
+                radial-gradient(700px 550px at 90% 20%, rgba(255,79,216,.10), transparent 60%),
+                linear-gradient(180deg, var(--bg0), var(--bg1));
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-grid {
+            position: fixed; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 56px 56px;
+            opacity: .20;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* Neon frames */
+        .neon-frame {
+            border-radius: var(--r);
+            background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        .neon-frame::before {
+            content: "";
+            position: absolute; inset: 0;
+            border-radius: inherit;
+            padding: var(--stroke);
+            background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,0));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: .8;
+        }
+        .neon-blue { --neon: var(--blue); }
+        .neon-green { --neon: var(--green); }
+        .neon-pink { --neon: var(--pink); }
+
+        .neon-frame::after {
+            content: "";
+            position: absolute; inset: -2px;
+            border-radius: inherit;
+            border: 1px solid color-mix(in srgb, var(--neon) 75%, transparent);
+            filter: drop-shadow(0 0 14px color-mix(in srgb, var(--neon) 55%, transparent))
+                    drop-shadow(0 0 34px color-mix(in srgb, var(--neon) 25%, transparent));
+            pointer-events: none;
+            opacity: .9;
+        }
+
+        .card {
+            padding: var(--pad);
+            background: radial-gradient(700px 260px at 10% 0%, rgba(255,255,255,.05), transparent 60%),
+                        rgba(10,14,26,.70);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Topbar */
+        .topbar {
+            margin: 26px auto 20px;
+            max-width: 1120px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; min-width: 200px; }
+        .brand__avatar {
+            width: 52px; height: 52px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 12px rgba(71,244,255,.5));
+        }
+        .brand__title { font-weight: 800; letter-spacing: .6px; }
+        .brand__sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+        .accent-green { color: var(--green); }
+        .accent-pink { color: var(--pink); }
+        .accent-cyan { color: var(--cyan); }
+        .accent-blue { color: var(--blue); }
+
+        .nav { display: flex; gap: 8px; flex: 1; justify-content: center; flex-wrap: wrap; align-items: center; }
+        .nav__item {
+            color: rgba(234,240,255,.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        .nav__item:hover, .nav__item.active {
+            color: var(--text);
+            background: rgba(255,255,255,.06);
+        }
+
+        /* Dropdown Menu */
+        .nav-dropdown {
+            position: relative;
+        }
+        .nav-dropdown__trigger {
+            color: rgba(234,240,255,.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .nav-dropdown__trigger:hover, .nav-dropdown.active .nav-dropdown__trigger {
+            color: var(--text);
+            background: rgba(255,255,255,.06);
+        }
+        .nav-dropdown__trigger i {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+        }
+        .nav-dropdown:hover .nav-dropdown__trigger i {
+            transform: rotate(180deg);
+        }
+        .nav-dropdown__menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 180px;
+            padding: 8px;
+            background: rgba(10,14,26,.95);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+        .nav-dropdown:hover .nav-dropdown__menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        .nav-dropdown__item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            color: rgba(234,240,255,.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .nav-dropdown__item:hover {
+            color: var(--text);
+            background: rgba(255,255,255,.06);
+        }
+        .nav-dropdown__item i {
+            width: 16px;
+            text-align: center;
+        }
+        .nav-dropdown__item.active {
+            color: var(--cyan);
+            background: rgba(71,244,255,.08);
+        }
+
+        /* Buttons */
+        .btn {
+            font: inherit;
+            color: var(--text);
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,.14);
+            background: rgba(10,14,26,.55);
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            background: rgba(255,255,255,.08);
+            border-color: rgba(255,255,255,.25);
+        }
+        .btn--ghost {
+            border-color: color-mix(in srgb, var(--blue) 55%, rgba(255,255,255,.12));
+            box-shadow: 0 0 0 1px rgba(35,183,255,.18) inset;
+        }
+        .btn--pink {
+            border-color: color-mix(in srgb, var(--pink) 55%, rgba(255,255,255,.12));
+            box-shadow: 0 0 0 1px rgba(255,79,216,.18) inset;
+        }
+        .btn--green {
+            border-color: color-mix(in srgb, var(--green) 55%, rgba(255,255,255,.12));
+            box-shadow: 0 0 0 1px rgba(48,255,138,.18) inset;
+        }
+        .btn--cyan {
+            border-color: color-mix(in srgb, var(--cyan) 55%, rgba(255,255,255,.12));
+            box-shadow: 0 0 0 1px rgba(71,244,255,.18) inset;
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Cart Button - Dog Icon */
+        .btn-cart {
+            position: relative;
+            padding: 8px 12px;
+        }
+        .btn-cart .dog-icon {
+            width: 26px;
+            height: 26px;
+        }
+        .btn-cart .bone {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-cart.has-items .bone {
+            opacity: 1;
+        }
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--pink);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(255,79,216,.5);
+        }
+        .btn-cart.has-items .cart-count {
+            display: flex;
+        }
+
+        /* Layout */
+        .layout {
+            max-width: 1120px;
+            margin: 0 auto 34px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 22px;
+            padding: 0 18px;
+        }
+        .leftcol { display: flex; flex-direction: column; gap: 22px; }
+        .rightcol { display: flex; flex-direction: column; gap: 22px; }
+
+        /* Profile card */
+        .card--profile { padding: 30px 22px; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+        .profile { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+        .profile__pic-wrap { position: relative; width: 120px; height: 120px; }
+        .profile__pic {
+            width: 120px; height: 120px; border-radius: 50%;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,.30), rgba(255,255,255,.06)),
+                linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+            border: 2px solid rgba(255,255,255,.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .ring {
+            position: absolute; inset: -8px;
+            border-radius: 50%;
+            border: 3px solid color-mix(in srgb, var(--pink) 75%, transparent);
+            filter: drop-shadow(0 0 12px rgba(255,79,216,.35));
+        }
+        .pill {
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,.14);
+            background: rgba(0,0,0,.25);
+        }
+        .pill--pro {
+            border-color: color-mix(in srgb, var(--pink) 65%, rgba(255,255,255,.12));
+            color: color-mix(in srgb, var(--pink) 85%, white);
+        }
+
+        /* Info card */
+        .h3 { margin: 0 0 12px; font-size: 18px; letter-spacing: .2px; }
+        .h2 { margin: 0 0 10px; font-size: 26px; letter-spacing: .2px; }
+        .muted { color: var(--muted); font-size: 13px; line-height: 1.5; }
+        .row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+        .sep { border: 0; height: 1px; background: rgba(255,255,255,.08); margin: 18px 0; }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot--blue { background: var(--blue); box-shadow: 0 0 10px rgba(35,183,255,.4); }
+        .dot--pink { background: var(--pink); box-shadow: 0 0 10px rgba(255,79,216,.35); }
+        .dot--green { background: var(--green); box-shadow: 0 0 10px rgba(48,255,138,.35); }
+        .tick {
+            display: inline-flex;
+            width: 18px; height: 18px;
+            align-items: center; justify-content: center;
+            border-radius: 6px;
+            background: rgba(48,255,138,.12);
+            border: 1px solid rgba(48,255,138,.32);
+            color: var(--green);
+            font-weight: 800;
+            font-size: 10px;
+        }
+
+        .mt { margin-top: 14px; }
+        .mt2 { margin-top: 18px; }
+
+        /* Hero */
+        .hero { min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
+        .hero__title {
+            display: flex; align-items: baseline; gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .kpi { font-size: 28px; font-weight: 800; color: var(--text); }
+
+        /* Stats blocks */
+        .stats-block { padding-top: 18px; }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+        .stat {
+            padding: 18px;
+            background: rgba(7,10,15,.35);
+            min-height: 120px;
+        }
+        .stat__label { font-weight: 600; opacity: .95; margin-bottom: 8px; font-size: 14px; }
+        .stat__value { font-size: 32px; font-weight: 800; letter-spacing: .2px; margin: 2px 0 8px; }
+        .stat__sub { font-size: 12px; }
+
+        /* Big bottom card */
+        .big { padding: 24px; }
+
+        /* Formations list */
+        .formation-item {
+            padding: 18px;
+            background: rgba(7,10,15,.35);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .formation-item:last-child { margin-bottom: 0; }
+        .formation-info h4 { margin: 0 0 4px; font-size: 15px; }
+        .formation-info p { margin: 0; font-size: 12px; color: var(--muted); }
+        .formation-price { 
+            font-size: 18px; 
+            font-weight: 700; 
+            white-space: nowrap;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-section .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .collapsible-section.collapsed .section-header {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        .section-chevron {
+            transition: transform 0.3s ease;
+            color: var(--muted);
+            font-size: 12px;
+        }
+        .collapsible-section.collapsed .section-chevron {
+            transform: rotate(-90deg);
+        }
+        .section-content {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .collapsible-section.collapsed .section-content {
+            display: none;
+        }
+        .section-header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-stats {
+            display: flex;
+            gap: 16px;
+        }
+        .header-stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 6px 12px;
+            background: rgba(7,10,15,.4);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,.06);
+        }
+        .header-stat-item span {
+            font-size: 10px;
+        }
+        .header-stat-item strong {
+            font-size: 16px;
+        }
+
+        /* Offer Items - Partenaires */
+        .offer-item {
+            padding: 18px;
+            padding-top: 40px;
+            background: rgba(7,10,15,.35);
+            margin-bottom: 14px;
+            position: relative;
+        }
+        .offer-item:last-child { margin-bottom: 0; }
+        .offer-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .offer-status.active {
+            background: rgba(48,255,138,.12);
+            color: var(--green);
+            border: 1px solid rgba(48,255,138,.3);
+        }
+        .offer-status.paused {
+            background: rgba(255,79,216,.12);
+            color: var(--pink);
+            border: 1px solid rgba(255,79,216,.3);
+        }
+        .offer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 0;
+        }
+        .offer-info { flex: 1; }
+        .offer-info h4 { margin: 0 0 8px; font-size: 15px; }
+        .offer-info p { margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+        .offer-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .offer-tag {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.1);
+            color: var(--muted);
+        }
+        .offer-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            min-width: 80px;
+        }
+        .offer-price {
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .offer-btns {
+            display: flex;
+            gap: 6px;
+        }
+        .btn--sm { padding: 8px 12px; font-size: 12px; }
+        .btn--danger {
+            border-color: rgba(239,68,68,.4);
+            color: #ef4444;
+        }
+        .btn--danger:hover {
+            background: rgba(239,68,68,.15);
+        }
+        .offer-stats {
+            display: flex;
+            gap: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+        .offer-stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .offer-stat-item strong {
+            font-size: 18px;
+        }
+
+        /* Compétences */
+        .btn-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.1);
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            transition: all 0.2s ease;
+        }
+        .btn-icon:hover {
+            background: rgba(71,244,255,.1);
+            border-color: rgba(71,244,255,.3);
+            color: var(--cyan);
+        }
+        .competence-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+        }
+        .comp-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        .comp-text {
+            font-size: 13px;
+        }
+        .points-forts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .point-fort-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(48,255,138,.1);
+            border: 1px solid rgba(48,255,138,.25);
+            color: var(--green);
+        }
+
+        /* Checkbox grid for competences */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: rgba(7,10,15,.4);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .checkbox-item:hover {
+            background: rgba(255,255,255,.04);
+            border-color: rgba(255,255,255,.15);
+        }
+        .checkbox-item input {
+            display: none;
+        }
+        .checkbox-item input:checked + .checkbox-label {
+            color: var(--green);
+        }
+        .checkbox-item:has(input:checked) {
+            background: rgba(48,255,138,.08);
+            border-color: rgba(48,255,138,.3);
+        }
+        .checkbox-label {
+            font-size: 12px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .checkbox-label i {
+            font-size: 14px;
+        }
+
+        /* Programme de Parrainage */
+        .parrainage-flow {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .parrainage-step {
+            flex: 1;
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(7,10,15,.4);
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.1);
+            border: 2px solid rgba(255,255,255,.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            margin: 0 0 6px;
+            font-size: 14px;
+        }
+        .step-content p {
+            margin: 0;
+            font-size: 12px;
+        }
+        .parrainage-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .parrainage-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .benefit-card {
+            padding: 20px;
+            background: rgba(7,10,15,.4);
+        }
+        .benefit-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .benefit-header h4 {
+            margin: 0;
+            font-size: 15px;
+        }
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,.05);
+        }
+        .benefit-list li:last-child {
+            border-bottom: none;
+        }
+
+        .parrain-code-section {
+            margin-top: 20px;
+        }
+        .code-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(7,10,15,.5);
+            margin-top: 12px;
+        }
+        .code-value {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--cyan);
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .parrainage-flow {
+                flex-direction: column;
+            }
+            .parrainage-arrow {
+                transform: rotate(90deg);
+                justify-content: center;
+            }
+            .parrainage-benefits {
+                grid-template-columns: 1fr;
+            }
+            .code-display {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .code-value {
+                font-size: 20px;
+            }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            width: 100%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.2s;
+        }
+        .modal-close:hover { color: var(--text); }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text);
+            background: rgba(7,10,15,.6);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(71,244,255,.1);
+        }
+        .form-textarea { resize: vertical; min-height: 80px; }
+        .form-select { cursor: pointer; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .form-actions .btn { flex: 1; justify-content: center; }
+
+        /* Disclaimer */
+        .disclaimer {
+            max-width: 1120px;
+            margin: 0 auto 16px;
+            padding: 8px 18px;
+            font-size: 11px;
+            color: var(--muted);
+            text-align: center;
+        }
+        .disclaimer strong { color: var(--cyan); }
+        .disclaimer a { color: var(--pink); }
+
+        /* Footer */
+        .footer {
+            max-width: 1120px;
+            margin: 40px auto 20px;
+            padding: 20px 18px;
+            border-top: 1px solid rgba(255,255,255,.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer__copy { font-size: 12px; color: var(--muted); }
+        .footer__links { display: flex; gap: 16px; }
+        .footer__links a { 
+            font-size: 12px; 
+            color: var(--muted); 
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer__links a:hover { color: var(--cyan); }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .layout { grid-template-columns: 1fr; }
+            .nav { justify-content: flex-start; }
+            .brand { min-width: auto; }
+        }
+        @media (max-width: 720px) {
+            .stats-row { grid-template-columns: 1fr; }
+            .topbar { flex-direction: column; align-items: stretch; gap: 12px; }
+            .nav { order: 3; }
+            .hero__title { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer">
+        <strong>Woof Academy</strong> ne prend en charge ni l'éducation canine ni le coaching sportif. Le coaching est <strong>sous-traité</strong> à des professionnels indépendants certifiés.
+        <a href="CgvWoof.html">En savoir plus</a>
+    </div>
+
+    <!-- TOPBAR -->
+    <header class="topbar neon-frame neon-blue">
+        <div class="brand">
+            <img src="https://www.genspark.ai/api/files/s/CMqdSq8G" alt="Woof Academy Logo" class="brand__avatar">
+            <div class="brand__txt">
+                <div class="brand__title">WOOF ACADEMY</div>
+                <div class="brand__sub">NETWORK / <span class="accent-pink">Espace Pro</span></div>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a class="nav__item" href="Concept.html">Concept</a>
+            <a class="nav__item" href="Activites.html">Activités</a>
+            <a class="nav__item" href="Abonnements.html">Abonnements</a>
+            <a class="nav__item" href="Planning-reservation.html">Planning</a>
+            <a class="nav__item" href="Shop.html">Boutique</a>
+            <a class="nav__item" href="Nous-contacter.html">Contact</a>
+            <a class="nav__item active" href="Espace-Pro.html"><i class="fas fa-briefcase"></i> Espace Pro</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="Panier.html" class="btn btn--cyan btn-cart" id="cartBtn" title="Mon Panier">
+                <svg class="dog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2C8 2 5 5 5 8c0 1.5.5 3 1.5 4L4 14c-.5.5-.5 1.5 0 2l1.5 1.5c.5.5 1.5.5 2 0l1-1c1 .5 2 .5 3.5.5s2.5 0 3.5-.5l1 1c.5.5 1.5.5 2 0L20 16c.5-.5.5-1.5 0-2l-2.5-2c1-1 1.5-2.5 1.5-4 0-3-3-6-7-6z"/>
+                    <circle cx="9" cy="8" r="1.5" fill="currentColor"/>
+                    <circle cx="15" cy="8" r="1.5" fill="currentColor"/>
+                    <ellipse cx="12" cy="11" rx="2" ry="1.5" fill="currentColor"/>
+                    <path class="bone" d="M8 18h8M7 17.5a1 1 0 1 1 0 2M7 19.5a1 1 0 1 1 0-2M17 17.5a1 1 0 1 0 0 2M17 19.5a1 1 0 1 0 0-2" stroke-width="1.5"/>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+            <a href="Login.html" class="btn btn--ghost"><i class="fas fa-user"></i> Connexion</a>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <main class="layout">
+        <!-- LEFT COLUMN -->
+        <aside class="leftcol">
+            <!-- Profile Card -->
+            <section class="card neon-frame neon-pink card--profile">
+                <div class="profile">
+                    <div class="profile__pic-wrap">
+                        <div class="profile__pic"><i class="fas fa-briefcase"></i></div>
+                        <span class="ring" aria-hidden="true"></span>
+                    </div>
+                    <span class="pill pill--pro"><i class="fas fa-star"></i> Espace Professionnel</span>
+                </div>
+            </section>
+
+            <!-- Mes Compétences -->
+            <section class="card neon-frame neon-blue" id="competences-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 class="h3" style="margin: 0;"><i class="fas fa-award accent-cyan"></i> Mes Compétences</h3>
+                    <button class="btn-icon" onclick="openCompetencesModal()" title="Modifier">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                </div>
+
+                <div id="competencesList">
+                    <div class="competence-item">
+                        <span class="comp-icon" style="background: rgba(48,255,138,.15); color: var(--green);"><i class="fas fa-graduation-cap"></i></span>
+                        <span class="comp-text"><strong class="accent-green">Éducation positive</strong></span>
+                    </div>
+                    <div class="competence-item">
+                        <span class="comp-icon" style="background: rgba(255,79,216,.15); color: var(--pink);"><i class="fas fa-brain"></i></span>
+                        <span class="comp-text"><strong class="accent-pink">Comportement</strong></span>
+                    </div>
+                    <div class="competence-item">
+                        <span class="comp-icon" style="background: rgba(35,183,255,.15); color: var(--blue);"><i class="fas fa-running"></i></span>
+                        <span class="comp-text"><strong class="accent-cyan">Agility</strong></span>
+                    </div>
+                </div>
+
+                <hr class="sep">
+
+                <h4 style="font-size: 13px; margin: 0 0 8px; color: var(--muted);"><i class="fas fa-star"></i> Points forts</h4>
+                <div id="pointsFortsList" class="points-forts">
+                    <span class="point-fort-tag">Chiots & socialisation</span>
+                    <span class="point-fort-tag">Chiens réactifs</span>
+                    <span class="point-fort-tag">Méthodes douces</span>
+                </div>
+            </section>
+
+            <!-- Stats Parrainage Quick -->
+            <section class="card neon-frame neon-green">
+                <h3 class="h3 accent-green">Mon Parrainage</h3>
+                <div class="stats-row" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat neon-frame neon-blue">
+                        <div class="stat__value accent-cyan">12</div>
+                        <div class="stat__sub muted">Filleuls actifs</div>
+                    </div>
+                    <div class="stat neon-frame neon-pink">
+                        <div class="stat__value accent-pink">340€</div>
+                        <div class="stat__sub muted">Économisés</div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- RIGHT COLUMN -->
+        <section class="rightcol">
+            <!-- Hero -->
+            <section class="card neon-frame neon-blue hero" style="min-height: 100px; padding: 18px 22px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span class="kpi" style="font-size: 22px;"><i class="fas fa-briefcase"></i></span>
+                        <div>
+                            <span class="accent-pink" style="font-size:20px;font-weight:800;">Espace Partenaires</span>
+                            <p class="muted" style="margin: 4px 0 0; font-size: 12px;" id="welcomeMessage">Bienvenue ! Prêt à développer votre activité ?</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="#mes-offres" class="btn btn--ghost btn--sm"><i class="fas fa-store"></i> Mes offres</a>
+                        <a href="#parrainage" class="btn btn--green btn--sm"><i class="fas fa-handshake"></i> Parrainage</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mes Offres Partenaires -->
+            <section class="card neon-frame neon-pink stats-block collapsible-section" id="mes-offres">
+                <div class="section-header" onclick="toggleSection('offersContent')">
+                    <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                        <i class="fas fa-chevron-down section-chevron" id="offersContent-chevron"></i>
+                        <h3 class="h3" style="margin: 0;"><i class="fas fa-store accent-pink"></i> Mes Offres Partenaires</h3>
+                    </div>
+                    <div class="section-header-right">
+                        <div class="header-stats">
+                            <div class="header-stat-item">
+                                <span class="muted">Actives</span>
+                                <strong class="accent-green" id="activeOffersCount">2</strong>
+                            </div>
+                            <div class="header-stat-item">
+                                <span class="muted">Vues</span>
+                                <strong class="accent-blue">127</strong>
+                            </div>
+                            <div class="header-stat-item">
+                                <span class="muted">Ventes</span>
+                                <strong class="accent-pink">8</strong>
+                            </div>
+                        </div>
+                        <button class="btn btn--green btn--sm" onclick="event.stopPropagation(); openOfferModal()">
+                            <i class="fas fa-plus"></i> Nouvelle
+                        </button>
+                    </div>
+                </div>
+                <div class="section-content" id="offersContent">
+                <p class="muted" style="margin-bottom: 18px;">Gérez vos offres visibles dans la boutique partenaires et le shop global.</p>
+                
+                <div id="offersContainer">
+                    <!-- Offre 1 -->
+                    <div class="offer-item neon-frame neon-blue" data-offer-id="1">
+                        <div class="offer-status active"><i class="fas fa-check-circle"></i> Active</div>
+                        <div class="offer-content">
+                            <div class="offer-info">
+                                <h4><span class="accent-cyan">Cours d'Éducation Canine - Pack 5 séances</span></h4>
+                                <p>5 séances individuelles de 45min | Tous niveaux | À domicile ou en extérieur</p>
+                                <div class="offer-tags">
+                                    <span class="offer-tag">Éducation</span>
+                                    <span class="offer-tag">Individuel</span>
+                                </div>
+                            </div>
+                            <div class="offer-actions">
+                                <div class="offer-price accent-green">180€</div>
+                                <div class="offer-btns">
+                                    <button class="btn btn--sm" onclick="editOffer(1)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn--sm btn--danger" onclick="deleteOffer(1)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offre 2 -->
+                    <div class="offer-item neon-frame neon-green" data-offer-id="2">
+                        <div class="offer-status active"><i class="fas fa-check-circle"></i> Active</div>
+                        <div class="offer-content">
+                            <div class="offer-info">
+                                <h4><span class="accent-green">Stage Agility Débutant - Week-end</span></h4>
+                                <p>2 jours intensifs | Initiation aux obstacles | Matériel fourni</p>
+                                <div class="offer-tags">
+                                    <span class="offer-tag">Agility</span>
+                                    <span class="offer-tag">Stage</span>
+                                    <span class="offer-tag">Débutant</span>
+                                </div>
+                            </div>
+                            <div class="offer-actions">
+                                <div class="offer-price accent-green">120€</div>
+                                <div class="offer-btns">
+                                    <button class="btn btn--sm" onclick="editOffer(2)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn--sm btn--danger" onclick="deleteOffer(2)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offre 3 -->
+                    <div class="offer-item neon-frame neon-pink" data-offer-id="3">
+                        <div class="offer-status paused"><i class="fas fa-pause-circle"></i> En pause</div>
+                        <div class="offer-content">
+                            <div class="offer-info">
+                                <h4><span class="accent-pink">Bilan Comportemental Complet</span></h4>
+                                <p>2h d'observation + rapport détaillé + plan d'action personnalisé</p>
+                                <div class="offer-tags">
+                                    <span class="offer-tag">Comportement</span>
+                                    <span class="offer-tag">Bilan</span>
+                                </div>
+                            </div>
+                            <div class="offer-actions">
+                                <div class="offer-price accent-pink">95€</div>
+                                <div class="offer-btns">
+                                    <button class="btn btn--sm" onclick="editOffer(3)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn--sm btn--danger" onclick="deleteOffer(3)"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </section>
+
+            <!-- Programme de Parrainage -->
+            <section class="card neon-frame neon-green big collapsible-section" id="parrainage">
+                <div class="section-header" onclick="toggleSection('parrainageContent')">
+                    <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                        <i class="fas fa-chevron-down section-chevron" id="parrainageContent-chevron"></i>
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(48,255,138,.15); border: 2px solid rgba(48,255,138,.4); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                            <i class="fas fa-handshake accent-green"></i>
+                        </div>
+                        <div>
+                            <h3 class="h3 accent-green" style="margin: 0;">Programme de Parrainage</h3>
+                            <p class="muted" style="margin: 0; font-size: 11px;">Gagnez ensemble avec vos clients !</p>
+                        </div>
+                    </div>
+                    <div class="section-header-right">
+                        <div class="header-stats">
+                            <div class="header-stat-item">
+                                <span class="muted">Filleuls</span>
+                                <strong class="accent-green">12</strong>
+                            </div>
+                            <div class="header-stat-item">
+                                <span class="muted">Économies</span>
+                                <strong class="accent-cyan">340€</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content" id="parrainageContent">
+                <p class="muted" style="margin-bottom: 20px;">
+                    Éducateurs canins et coachs sportifs, parrainez vos clients et bénéficiez d'avantages exclusifs. 
+                    Vos clients peuvent également vous parrainer ! C'est gagnant-gagnant 🎉
+                </p>
+
+                <!-- Comment ça marche -->
+                <div class="parrainage-flow">
+                    <div class="parrainage-step neon-frame neon-blue">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4 class="accent-cyan"><i class="fas fa-share-alt"></i> Partagez votre code</h4>
+                            <p class="muted">Transmettez votre code parrain unique à vos clients ou prospects</p>
+                        </div>
+                    </div>
+                    <div class="parrainage-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="parrainage-step neon-frame neon-pink">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4 class="accent-pink"><i class="fas fa-user-plus"></i> Ils s'inscrivent</h4>
+                            <p class="muted">Votre filleul souscrit un abonnement trimestriel avec votre code</p>
+                        </div>
+                    </div>
+                    <div class="parrainage-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="parrainage-step neon-frame neon-green">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4 class="accent-green"><i class="fas fa-gift"></i> Vous gagnez tous les deux</h4>
+                            <p class="muted">Avantages immédiats pour le parrain ET le filleul !</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="sep" style="margin: 24px 0;">
+
+                <!-- Avantages -->
+                <h3 class="h3 mt2"><i class="fas fa-star accent-pink"></i> Avantages du Programme</h3>
+                
+                <div class="parrainage-benefits">
+                    <!-- Avantages Parrain (Éducateur/Coach) -->
+                    <div class="benefit-card neon-frame neon-pink">
+                        <div class="benefit-header">
+                            <span class="benefit-icon"><i class="fas fa-user-tie"></i></span>
+                            <h4>Pour vous <span class="accent-pink">(Parrain)</span></h4>
+                        </div>
+                        <ul class="benefit-list">
+                            <li><span class="tick">✓</span> <strong class="accent-green">-15%</strong> sur la location d'espaces</li>
+                            <li><span class="tick">✓</span> <strong class="accent-cyan">Mise en avant</strong> sur le site web</li>
+                            <li><span class="tick">✓</span> Badge <strong class="accent-pink">"Partenaire Actif"</strong> sur votre profil</li>
+                            <li><span class="tick">✓</span> Priorité sur les <strong>créneaux</strong> de réservation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Avantages Filleul (Client) -->
+                    <div class="benefit-card neon-frame neon-blue">
+                        <div class="benefit-header">
+                            <span class="benefit-icon"><i class="fas fa-user"></i></span>
+                            <h4>Pour votre client <span class="accent-cyan">(Filleul)</span></h4>
+                        </div>
+                        <ul class="benefit-list">
+                            <li><span class="tick">✓</span> <strong class="accent-green">-20%</strong> sur l'abonnement trimestriel</li>
+                            <li><span class="tick">✓</span> <strong class="accent-cyan">1 cours offert</strong> à l'inscription</li>
+                            <li><span class="tick">✓</span> Accès aux <strong class="accent-pink">offres partenaires</strong> exclusives</li>
+                            <li><span class="tick">✓</span> <strong>Points fidélité</strong> bonus (+50 pts)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="sep" style="margin: 24px 0;">
+
+                <!-- Mon code parrain -->
+                <div class="parrain-code-section">
+                    <h3 class="h3"><i class="fas fa-qrcode accent-cyan"></i> Mon Code Parrain</h3>
+                    <div class="code-display neon-frame neon-blue">
+                        <div class="code-value" id="parrainCode">WOOF-PRO-7X9K2</div>
+                        <button class="btn btn--ghost btn--sm" onclick="copyParrainCode()">
+                            <i class="fas fa-copy"></i> Copier
+                        </button>
+                    </div>
+                    <p class="muted" style="margin-top: 10px; font-size: 12px;">
+                        <i class="fas fa-info-circle"></i> Partagez ce code avec vos clients. Ils l'utiliseront lors de leur inscription.
+                    </p>
+                </div>
+
+                <!-- Stats parrainage -->
+                <div class="stats-row mt2">
+                    <article class="stat neon-frame neon-green">
+                        <div class="stat__label"><i class="fas fa-users"></i> Filleuls actifs</div>
+                        <div class="stat__value accent-green">12</div>
+                        <div class="stat__sub muted">Clients parrainés</div>
+                    </article>
+
+                    <article class="stat neon-frame neon-blue">
+                        <div class="stat__label"><i class="fas fa-euro-sign"></i> Économies</div>
+                        <div class="stat__value accent-cyan">340€</div>
+                        <div class="stat__sub muted">Ce trimestre</div>
+                    </article>
+
+                    <article class="stat neon-frame neon-pink">
+                        <div class="stat__label"><i class="fas fa-chart-line"></i> Rang</div>
+                        <div class="stat__value accent-pink">Top 10</div>
+                        <div class="stat__sub muted">Des parrains actifs</div>
+                    </article>
+                </div>
+
+                <div class="mt2" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn btn--green" onclick="shareParrainCode()"><i class="fas fa-share"></i> Partager mon code</button>
+                    <a href="Nous-contacter.html?sujet=parrainage" class="btn btn--ghost"><i class="fas fa-question-circle"></i> En savoir plus</a>
+                </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer__copy">© 2024 Woof Academy Network. Tous droits réservés.</div>
+        <div class="footer__links">
+            <a href="index.html">Accueil</a>
+            <a href="CgvWoof.html">CGV</a>
+            <a href="Nous-contacter.html">Contact</a>
+        </div>
+    </footer>
+
+    <!-- MODAL COMPÉTENCES -->
+    <div class="modal-overlay" id="competencesModal">
+        <div class="modal card neon-frame neon-blue">
+            <div class="modal-header">
+                <h3 class="h3" style="margin: 0;"><i class="fas fa-award accent-cyan"></i> Mes Compétences</h3>
+                <button class="modal-close" onclick="closeCompetencesModal()"><i class="fas fa-times"></i></button>
+            </div>
+
+            <form id="competencesForm" onsubmit="saveCompetences(event)">
+                <div class="form-group">
+                    <label class="form-label">Domaines d'expertise (sélectionnez vos spécialités)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="education" checked>
+                            <span class="checkbox-label"><i class="fas fa-graduation-cap"></i> Éducation positive</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="comportement" checked>
+                            <span class="checkbox-label"><i class="fas fa-brain"></i> Comportement</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="agility" checked>
+                            <span class="checkbox-label"><i class="fas fa-running"></i> Agility</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="obeissance">
+                            <span class="checkbox-label"><i class="fas fa-dog"></i> Obéissance</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="canicross">
+                            <span class="checkbox-label"><i class="fas fa-person-running"></i> Canicross</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="medical">
+                            <span class="checkbox-label"><i class="fas fa-kit-medical"></i> Medical training</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="tricks">
+                            <span class="checkbox-label"><i class="fas fa-magic"></i> Tricks & tours</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="competences" value="pistage">
+                            <span class="checkbox-label"><i class="fas fa-search"></i> Pistage / Mantrailing</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Points forts (ce qui vous distingue)</label>
+                    <input type="text" class="form-input" id="pointsForts" value="Chiots & socialisation, Chiens réactifs, Méthodes douces" placeholder="Ex: Chiots, Chiens anxieux, À domicile...">
+                    <p class="muted" style="margin-top: 6px; font-size: 11px;"><i class="fas fa-info-circle"></i> Séparez par des virgules</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Années d'expérience</label>
+                    <select class="form-select" id="experience">
+                        <option value="1-2">1-2 ans</option>
+                        <option value="3-5" selected>3-5 ans</option>
+                        <option value="5-10">5-10 ans</option>
+                        <option value="10+">10+ ans</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Certifications / Diplômes</label>
+                    <textarea class="form-textarea" id="certifications" placeholder="ACACED, BP Éducateur Canin, Certification clicker...">ACACED, Certification méthodes positives</textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeCompetencesModal()">Annuler</button>
+                    <button type="submit" class="btn btn--green"><i class="fas fa-save"></i> Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL NOUVELLE OFFRE -->
+    <div class="modal-overlay" id="offerModal">
+        <div class="modal card neon-frame neon-pink">
+            <div class="modal-header">
+                <h3 class="h3" style="margin: 0;" id="modalTitle"><i class="fas fa-plus accent-pink"></i> Nouvelle Offre</h3>
+                <button class="modal-close" onclick="closeOfferModal()"><i class="fas fa-times"></i></button>
+            </div>
+
+            <form id="offerForm" onsubmit="saveOffer(event)">
+                <input type="hidden" id="offerId" value="">
+
+                <div class="form-group">
+                    <label class="form-label">Titre de l'offre *</label>
+                    <input type="text" class="form-input" id="offerTitle" placeholder="Ex: Cours d'éducation canine - Pack 5 séances" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description *</label>
+                    <textarea class="form-textarea" id="offerDescription" placeholder="Décrivez votre offre en détail..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Prix (€) *</label>
+                        <input type="number" class="form-input" id="offerPrice" placeholder="180" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catégorie *</label>
+                        <select class="form-select" id="offerCategory" required>
+                            <option value="">Sélectionner...</option>
+                            <option value="education">Éducation</option>
+                            <option value="comportement">Comportement</option>
+                            <option value="agility">Agility</option>
+                            <option value="stage">Stage</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" id="offerType">
+                            <option value="individuel">Individuel</option>
+                            <option value="collectif">Collectif</option>
+                            <option value="stage">Stage</option>
+                            <option value="pack">Pack / Forfait</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Statut</label>
+                        <select class="form-select" id="offerStatus">
+                            <option value="active">Active</option>
+                            <option value="paused">En pause</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tags (séparés par des virgules)</label>
+                    <input type="text" class="form-input" id="offerTags" placeholder="Éducation, Individuel, Débutant">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeOfferModal()">Annuler</button>
+                    <button type="submit" class="btn btn--green"><i class="fas fa-save"></i> Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Données des offres (simulées - en production, utilisez l'API RESTful)
+        let partnerOffers = [
+            { id: 1, title: "Cours d'Éducation Canine - Pack 5 séances", description: "5 séances individuelles de 45min | Tous niveaux | À domicile ou en extérieur", price: 180, category: "education", type: "pack", status: "active", tags: ["Éducation", "Individuel"] },
+            { id: 2, title: "Stage Agility Débutant - Week-end", description: "2 jours intensifs | Initiation aux obstacles | Matériel fourni", price: 120, category: "agility", type: "stage", status: "active", tags: ["Agility", "Stage", "Débutant"] },
+            { id: 3, title: "Bilan Comportemental Complet", description: "2h d'observation + rapport détaillé + plan d'action personnalisé", price: 95, category: "comportement", type: "individuel", status: "paused", tags: ["Comportement", "Bilan"] }
+        ];
+
+        // Ouvrir le modal
+        function openOfferModal() {
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus accent-pink"></i> Nouvelle Offre';
+            document.getElementById('offerForm').reset();
+            document.getElementById('offerId').value = '';
+            document.getElementById('offerModal').classList.add('active');
+        }
+
+        // Fermer le modal
+        function closeOfferModal() {
+            document.getElementById('offerModal').classList.remove('active');
+        }
+
+        // Éditer une offre
+        function editOffer(id) {
+            const offer = partnerOffers.find(o => o.id === id);
+            if (!offer) return;
+
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-edit accent-cyan"></i> Modifier l\'Offre';
+            document.getElementById('offerId').value = offer.id;
+            document.getElementById('offerTitle').value = offer.title;
+            document.getElementById('offerDescription').value = offer.description;
+            document.getElementById('offerPrice').value = offer.price;
+            document.getElementById('offerCategory').value = offer.category;
+            document.getElementById('offerType').value = offer.type;
+            document.getElementById('offerStatus').value = offer.status;
+            document.getElementById('offerTags').value = offer.tags.join(', ');
+
+            document.getElementById('offerModal').classList.add('active');
+        }
+
+        // Supprimer une offre
+        function deleteOffer(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette offre ?')) {
+                partnerOffers = partnerOffers.filter(o => o.id !== id);
+                renderOffers();
+                showNotification('Offre supprimée avec succès', 'success');
+            }
+        }
+
+        // Sauvegarder une offre
+        function saveOffer(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('offerId').value;
+            const offerData = {
+                title: document.getElementById('offerTitle').value,
+                description: document.getElementById('offerDescription').value,
+                price: parseFloat(document.getElementById('offerPrice').value),
+                category: document.getElementById('offerCategory').value,
+                type: document.getElementById('offerType').value,
+                status: document.getElementById('offerStatus').value,
+                tags: document.getElementById('offerTags').value.split(',').map(t => t.trim()).filter(t => t)
+            };
+
+            if (id) {
+                // Mise à jour
+                const index = partnerOffers.findIndex(o => o.id === parseInt(id));
+                if (index !== -1) {
+                    partnerOffers[index] = { ...partnerOffers[index], ...offerData };
+                }
+                showNotification('Offre mise à jour avec succès', 'success');
+            } else {
+                // Nouvelle offre
+                const newId = Math.max(...partnerOffers.map(o => o.id), 0) + 1;
+                partnerOffers.push({ id: newId, ...offerData });
+                showNotification('Nouvelle offre créée avec succès', 'success');
+            }
+
+            closeOfferModal();
+            renderOffers();
+        }
+
+        // Afficher les offres
+        function renderOffers() {
+            const container = document.getElementById('offersContainer');
+            const colors = { education: 'blue', comportement: 'pink', agility: 'green', stage: 'green', autre: 'blue' };
+            
+            container.innerHTML = partnerOffers.map(offer => {
+                const color = colors[offer.category] || 'blue';
+                const statusClass = offer.status === 'active' ? 'active' : 'paused';
+                const statusIcon = offer.status === 'active' ? 'check-circle' : 'pause-circle';
+                const statusText = offer.status === 'active' ? 'Active' : 'En pause';
+                
+                return `
+                    <div class="offer-item neon-frame neon-${color}" data-offer-id="${offer.id}">
+                        <div class="offer-status ${statusClass}"><i class="fas fa-${statusIcon}"></i> ${statusText}</div>
+                        <div class="offer-content">
+                            <div class="offer-info">
+                                <h4><span class="accent-${color === 'blue' ? 'cyan' : color}">${offer.title}</span></h4>
+                                <p>${offer.description}</p>
+                                <div class="offer-tags">
+                                    ${offer.tags.map(tag => `<span class="offer-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="offer-actions">
+                                <div class="offer-price accent-${color === 'blue' ? 'cyan' : color}">${offer.price}€</div>
+                                <div class="offer-btns">
+                                    <button class="btn btn--sm" onclick="editOffer(${offer.id})"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn--sm btn--danger" onclick="deleteOffer(${offer.id})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Mettre à jour les stats dans le header
+            const activeCount = partnerOffers.filter(o => o.status === 'active').length;
+            const activeCountEl = document.getElementById('activeOffersCount');
+            if (activeCountEl) activeCountEl.textContent = activeCount;
+        }
+
+        // Notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 14px 20px;
+                background: ${type === 'success' ? 'rgba(48,255,138,.15)' : 'rgba(35,183,255,.15)'};
+                border: 1px solid ${type === 'success' ? 'rgba(48,255,138,.4)' : 'rgba(35,183,255,.4)'};
+                color: ${type === 'success' ? 'var(--green)' : 'var(--blue)'};
+                border-radius: 12px;
+                font-size: 14px;
+                z-index: 2000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Fermer modal offres en cliquant à l'extérieur
+        document.getElementById('offerModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeOfferModal();
+        });
+
+        // Cart Badge - Dog with bone
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('woofCart')) || [];
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBtn = document.getElementById('cartBtn');
+            const cartCount = document.getElementById('cartCount');
+            
+            if (cartBtn && cartCount) {
+                cartCount.textContent = count;
+                if (count > 0) {
+                    cartBtn.classList.add('has-items');
+                } else {
+                    cartBtn.classList.remove('has-items');
+                }
+            }
+            return count;
+        }
+        
+        // Update cart on page load
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+
+        // Copier le code parrain
+        function copyParrainCode() {
+            const code = document.getElementById('parrainCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                showNotification('Code copié dans le presse-papier !', 'success');
+            }).catch(() => {
+                // Fallback pour les navigateurs plus anciens
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Code copié !', 'success');
+            });
+        }
+
+        // Partager le code parrain
+        function shareParrainCode() {
+            const code = document.getElementById('parrainCode').textContent;
+            const shareText = `🐕 Rejoins Woof Academy avec mon code parrain ${code} et bénéficie de -20% sur ton abonnement trimestriel + 1 cours offert ! 🎉\n\nhttps://woofacademy.fr?ref=${code}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mon code parrain Woof Academy',
+                    text: shareText,
+                }).catch(() => {});
+            } else {
+                // Fallback: copier le texte
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showNotification('Texte de partage copié !', 'success');
+                });
+            }
+        }
+
+        // =============================================
+        // GESTION DES COMPÉTENCES
+        // =============================================
+
+        // Configuration des compétences disponibles
+        const competencesConfig = {
+            education: { label: 'Éducation positive', icon: 'fa-graduation-cap', color: 'green' },
+            comportement: { label: 'Comportement', icon: 'fa-brain', color: 'pink' },
+            agility: { label: 'Agility', icon: 'fa-running', color: 'blue' },
+            obeissance: { label: 'Obéissance', icon: 'fa-dog', color: 'cyan' },
+            canicross: { label: 'Canicross', icon: 'fa-person-running', color: 'green' },
+            medical: { label: 'Medical training', icon: 'fa-kit-medical', color: 'pink' },
+            tricks: { label: 'Tricks & tours', icon: 'fa-magic', color: 'blue' },
+            pistage: { label: 'Pistage / Mantrailing', icon: 'fa-search', color: 'cyan' }
+        };
+
+        // Couleurs CSS mappées
+        const colorMap = {
+            green: { bg: 'rgba(48,255,138,.15)', text: 'var(--green)', accent: 'accent-green' },
+            pink: { bg: 'rgba(255,79,216,.15)', text: 'var(--pink)', accent: 'accent-pink' },
+            blue: { bg: 'rgba(35,183,255,.15)', text: 'var(--blue)', accent: 'accent-blue' },
+            cyan: { bg: 'rgba(71,244,255,.15)', text: 'var(--cyan)', accent: 'accent-cyan' }
+        };
+
+        // Données des compétences (simulées - en production via API)
+        let educatorCompetences = {
+            competences: ['education', 'comportement', 'agility'],
+            pointsForts: ['Chiots & socialisation', 'Chiens réactifs', 'Méthodes douces'],
+            experience: '3-5',
+            certifications: 'ACACED, Certification méthodes positives'
+        };
+
+        // Charger depuis localStorage si disponible
+        function loadCompetences() {
+            const saved = localStorage.getItem('woofEducatorCompetences');
+            if (saved) {
+                educatorCompetences = JSON.parse(saved);
+                renderCompetences();
+            }
+        }
+
+        // Ouvrir le modal des compétences
+        function openCompetencesModal() {
+            const modal = document.getElementById('competencesModal');
+            
+            // Pré-remplir les checkboxes
+            document.querySelectorAll('#competencesForm input[name="competences"]').forEach(cb => {
+                cb.checked = educatorCompetences.competences.includes(cb.value);
+            });
+            
+            // Pré-remplir les autres champs
+            document.getElementById('pointsForts').value = educatorCompetences.pointsForts.join(', ');
+            document.getElementById('experience').value = educatorCompetences.experience;
+            document.getElementById('certifications').value = educatorCompetences.certifications;
+            
+            modal.classList.add('active');
+        }
+
+        // Fermer le modal des compétences
+        function closeCompetencesModal() {
+            document.getElementById('competencesModal').classList.remove('active');
+        }
+
+        // Sauvegarder les compétences
+        function saveCompetences(event) {
+            event.preventDefault();
+            
+            // Récupérer les compétences cochées
+            const checkedCompetences = [];
+            document.querySelectorAll('#competencesForm input[name="competences"]:checked').forEach(cb => {
+                checkedCompetences.push(cb.value);
+            });
+            
+            // Récupérer les points forts
+            const pointsFortsValue = document.getElementById('pointsForts').value;
+            const pointsForts = pointsFortsValue.split(',').map(p => p.trim()).filter(p => p);
+            
+            // Mettre à jour les données
+            educatorCompetences = {
+                competences: checkedCompetences,
+                pointsForts: pointsForts,
+                experience: document.getElementById('experience').value,
+                certifications: document.getElementById('certifications').value
+            };
+            
+            // Sauvegarder dans localStorage
+            localStorage.setItem('woofEducatorCompetences', JSON.stringify(educatorCompetences));
+            
+            // Mettre à jour l'affichage
+            renderCompetences();
+            
+            // Fermer le modal et notifier
+            closeCompetencesModal();
+            showNotification('Compétences mises à jour avec succès !', 'success');
+        }
+
+        // Afficher les compétences
+        function renderCompetences() {
+            const listContainer = document.getElementById('competencesList');
+            const pointsContainer = document.getElementById('pointsFortsList');
+            
+            // Afficher les compétences (max 4 pour rester compact)
+            const competencesToShow = educatorCompetences.competences.slice(0, 4);
+            listContainer.innerHTML = competencesToShow.map(compKey => {
+                const config = competencesConfig[compKey];
+                if (!config) return '';
+                
+                const colors = colorMap[config.color];
+                return `
+                    <div class="competence-item">
+                        <span class="comp-icon" style="background: ${colors.bg}; color: ${colors.text};">
+                            <i class="fas ${config.icon}"></i>
+                        </span>
+                        <span class="comp-text"><strong class="${colors.accent}">${config.label}</strong></span>
+                    </div>
+                `;
+            }).join('');
+            
+            // Si plus de 4 compétences, afficher un indicateur
+            if (educatorCompetences.competences.length > 4) {
+                const remaining = educatorCompetences.competences.length - 4;
+                listContainer.innerHTML += `
+                    <div class="competence-item" style="opacity: 0.7;">
+                        <span class="comp-icon" style="background: rgba(255,255,255,.1); color: var(--muted);">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="comp-text muted">+ ${remaining} autre${remaining > 1 ? 's' : ''}</span>
+                    </div>
+                `;
+            }
+            
+            // Afficher les points forts
+            pointsContainer.innerHTML = educatorCompetences.pointsForts.map(point => 
+                `<span class="point-fort-tag">${point}</span>`
+            ).join('');
+            
+            // Si aucun point fort
+            if (educatorCompetences.pointsForts.length === 0) {
+                pointsContainer.innerHTML = '<span class="muted" style="font-size: 11px;">Aucun point fort défini</span>';
+            }
+        }
+
+        // Event listeners pour le modal des compétences
+        document.getElementById('competencesModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeCompetencesModal();
+        });
+
+        // Mettre à jour l'écouteur Escape pour inclure le modal des compétences
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeOfferModal();
+                closeCompetencesModal();
+            }
+        });
+
+        // Charger les compétences au démarrage
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCompetences();
+            setWelcomeMessage();
+        });
+
+        // =============================================
+        // SECTIONS PLIABLES / DÉPLIABLES
+        // =============================================
+
+        function toggleSection(contentId) {
+            const section = document.getElementById(contentId).closest('.collapsible-section');
+            section.classList.toggle('collapsed');
+            
+            // Sauvegarder l'état dans localStorage
+            const collapsedSections = JSON.parse(localStorage.getItem('woofCollapsedSections') || '{}');
+            collapsedSections[contentId] = section.classList.contains('collapsed');
+            localStorage.setItem('woofCollapsedSections', JSON.stringify(collapsedSections));
+        }
+
+        // Restaurer l'état des sections au chargement
+        function restoreSectionStates() {
+            const collapsedSections = JSON.parse(localStorage.getItem('woofCollapsedSections') || '{}');
+            Object.keys(collapsedSections).forEach(contentId => {
+                if (collapsedSections[contentId]) {
+                    const content = document.getElementById(contentId);
+                    if (content) {
+                        content.closest('.collapsible-section').classList.add('collapsed');
+                    }
+                }
+            });
+        }
+
+        // =============================================
+        // MESSAGE DE BIENVENUE DYNAMIQUE
+        // =============================================
+
+        const welcomeMessages = [
+            "Bienvenue ! Prêt à développer votre activité ? 🚀",
+            "Content de vous revoir ! Vos clients vous attendent 🐕",
+            "Bonjour ! De nouvelles opportunités vous attendent ✨",
+            "Ravi de vous voir ! Consultez vos stats du jour 📊",
+            "Hello ! Votre espace pro est à jour 👋",
+            "Bienvenue ! Vos offres font parler d'elles 🌟",
+            "Bon retour ! Des filleuls vous ont rejoint 🎉",
+            "Salut ! Prêt à conquérir de nouveaux clients ? 💪",
+            "Re-bonjour ! Votre profil attire l'attention 👀",
+            "Welcome back ! Le succès vous attend 🏆"
+        ];
+
+        function setWelcomeMessage() {
+            const messageEl = document.getElementById('welcomeMessage');
+            if (messageEl) {
+                // Générer un index basé sur la date + heure pour varier
+                const now = new Date();
+                const seed = now.getDate() + now.getHours() + now.getMinutes();
+                const index = seed % welcomeMessages.length;
+                messageEl.textContent = welcomeMessages[index];
+            }
+        }
+
+        // Initialiser au chargement
+        document.addEventListener('DOMContentLoaded', restoreSectionStates);
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</body>
+</html>

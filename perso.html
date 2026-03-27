@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Neon Dashboard - Test</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#070a0f;
+      --bg1:#0b1020;
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.62);
+
+      --blue:#23b7ff;
+      --green:#30ff8a;
+      --pink:#ff4fd8;
+      --cyan:#47f4ff;
+
+      --r:18px;
+      --pad:22px;
+      --stroke:2px;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(35,183,255,.14), transparent 55%),
+        radial-gradient(900px 700px at 70% 70%, rgba(48,255,138,.10), transparent 60%),
+        radial-gradient(700px 550px at 90% 20%, rgba(255,79,216,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    .bg-grid{
+      position:fixed; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity:.20;
+      pointer-events:none;
+      mix-blend-mode:overlay;
+    }
+
+    /* neon frames */
+    .neon-frame{
+      border-radius:var(--r);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .neon-frame::before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:inherit;
+      padding:var(--stroke);
+      background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,0));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.8;
+    }
+    .neon-blue{ --neon: var(--blue); }
+    .neon-green{ --neon: var(--green); }
+    .neon-pink{ --neon: var(--pink); }
+
+    .neon-frame::after{
+      content:"";
+      position:absolute; inset:-2px;
+      border-radius:inherit;
+      border: 1px solid color-mix(in srgb, var(--neon) 75%, transparent);
+      filter: drop-shadow(0 0 14px color-mix(in srgb, var(--neon) 55%, transparent))
+              drop-shadow(0 0 34px color-mix(in srgb, var(--neon) 25%, transparent));
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .card{
+      padding:var(--pad);
+      background: radial-gradient(700px 260px at 10% 0%, rgba(255,255,255,.05), transparent 60%),
+                rgba(10,14,26,.70);
+      backdrop-filter: blur(10px);
+    }
+
+    /* topbar */
+    .topbar{
+      margin:26px auto 20px;
+      max-width:1120px;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px;}
+    .brand__avatar{
+      width:36px; height:36px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .brand__title{font-weight:800; letter-spacing:.6px}
+    .brand__sub{font-size:12px; color:var(--muted); margin-top:2px}
+    .accent-green{color:var(--green)}
+    .accent-pink{color:var(--pink)}
+    .accent-cyan{color:var(--cyan)}
+
+    .nav{display:flex; gap:18px; flex:1; justify-content:center; flex-wrap:wrap;}
+    .nav__item{
+      color:rgba(234,240,255,.7);
+      text-decoration:none;
+      font-weight:500;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    .nav__item:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+    }
+
+    /* buttons */
+    .btn{
+      font:inherit;
+      color:var(--text);
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,14,26,.55);
+      border-radius:999px;
+      padding:10px 14px;
+    }
+    .btn--ghost{
+      padding:10px 18px;
+      border-color: color-mix(in srgb, var(--blue) 55%, rgba(255,255,255,.12));
+      box-shadow: 0 0 0 1px rgba(35,183,255,.18) inset;
+    }
+    .btn--chip{
+      padding:10px 16px;
+      border-color: rgba(255,255,255,.14);
+      box-shadow:
+        0 0 0 1px rgba(35,183,255,.25) inset,
+        0 0 22px rgba(35,183,255,.10);
+    }
+
+    /* layout */
+    .layout{
+      max-width:1120px;
+      margin:0 auto 34px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:22px;
+      padding:0 18px;
+    }
+    .leftcol{display:flex; flex-direction:column; gap:22px;}
+    .rightcol{display:flex; flex-direction:column; gap:22px;}
+
+    /* profile card */
+    .card--profile{padding:30px 22px; min-height:240px; display:flex; align-items:center; justify-content:center;}
+    .profile{display:flex; flex-direction:column; align-items:center; gap:10px;}
+    .profile__pic-wrap{position:relative; width:140px; height:140px;}
+    .profile__pic{
+      width:140px; height:140px; border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.30), rgba(255,255,255,.06)),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border: 2px solid rgba(255,255,255,.10);
+    }
+    .ring{
+      position:absolute; inset:-8px;
+      border-radius:50%;
+      border:3px solid color-mix(in srgb, var(--green) 75%, transparent);
+      filter: drop-shadow(0 0 12px rgba(48,255,138,.35));
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+    }
+    .pill--verify{
+      border-color: color-mix(in srgb, var(--green) 65%, rgba(255,255,255,.12));
+      color: color-mix(in srgb, var(--green) 85%, white);
+    }
+
+    /* info card */
+    .h3{margin:0 0 12px; font-size:18px; letter-spacing:.2px}
+    .h2{margin:0 0 10px; font-size:26px; letter-spacing:.2px}
+    .muted{color:var(--muted); font-size:13px; line-height:1.5}
+    .row{display:flex; align-items:center; gap:10px; margin:8px 0}
+    .sep{border:0; height:1px; background:rgba(255,255,255,.08); margin:18px 0}
+
+    .dot{width:8px; height:8px; border-radius:50%}
+    .dot--blue{background:var(--blue); box-shadow:0 0 10px rgba(35,183,255,.4)}
+    .dot--pink{background:var(--pink); box-shadow:0 0 10px rgba(255,79,216,.35)}
+    .dot--green{background:var(--green); box-shadow:0 0 10px rgba(48,255,138,.35)}
+    .tick{
+      display:inline-flex;
+      width:18px; height:18px;
+      align-items:center; justify-content:center;
+      border-radius:6px;
+      background: rgba(48,255,138,.12);
+      border:1px solid rgba(48,255,138,.32);
+      color: var(--green);
+      font-weight:800;
+    }
+
+    .mt{margin-top:14px}
+    .mt2{margin-top:18px}
+
+    /* hero */
+    .hero{min-height:190px; display:flex; flex-direction:column; justify-content:center}
+    .hero__title{
+      display:flex; align-items:baseline; gap:10px;
+      margin-bottom:8px;
+    }
+    .kpi{font-size:28px; font-weight:800; color:var(--text)}
+
+    /* stats blocks */
+    .stats-block{padding-top:18px}
+    .stats-row{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:18px;
+    }
+    .stat{
+      padding:18px 18px;
+      background: rgba(7,10,15,.35);
+      min-height:120px;
+    }
+    .stat__label{font-weight:600; opacity:.95; margin-bottom:8px}
+    .stat__value{font-size:34px; font-weight:800; letter-spacing:.2px; margin:2px 0 8px}
+    .stat__sub{font-size:12px}
+
+    /* big bottom card */
+    .big{padding:24px}
+
+    /* responsive */
+    @media (max-width: 980px){
+      .layout{grid-template-columns: 1fr; }
+      .nav{justify-content:flex-start}
+      .brand{min-width:auto}
+    }
+    @media (max-width: 720px){
+      .stats-row{grid-template-columns:1fr}
+      .topbar{flex-direction:column; align-items:stretch}
+      .btn--ghost{align-self:flex-end}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="topbar neon-frame neon-blue">
+    <div class="brand">
+      <div class="brand__avatar" aria-hidden="true"></div>
+      <div class="brand__txt">
+        <div class="brand__title">WOOF ACADEMY</div>
+        <div class="brand__sub">NETWORK / <span class="accent-green">Network</span></div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav__item" href="#">Commien</a>
+      <a class="nav__item" href="#">Camessation</a>
+      <a class="nav__item" href="#">Conrit bleus</a>
+      <a class="nav__item" href="#">Active</a>
+    </nav>
+
+    <button class="btn btn--ghost">Sopfrler</button>
+  </header>
+
+  <main class="layout">
+    <aside class="leftcol">
+      <section class="card neon-frame neon-blue card--profile">
+        <div class="profile">
+          <div class="profile__pic-wrap">
+            <div class="profile__pic" role="img" aria-label="Photo de profil"></div>
+            <span class="ring" aria-hidden="true"></span>
+          </div>
+          <span class="pill pill--verify">Verify</span>
+        </div>
+      </section>
+
+      <section class="card neon-frame neon-blue card--info">
+        <h3 class="h3">Pro Siber</h3>
+
+        <div class="muted row"><span class="dot dot--blue"></span><span>Modet wrap</span></div>
+        <div class="muted row"><span class="dot dot--blue"></span><span>à8rfortum dIut capute at mie</span></div>
+
+        <hr class="sep">
+
+        <h3 class="h3">Stat Status</h3>
+        <div class="muted row"><span class="dot dot--pink"></span><span>Mvaàtrte osalhirs</span></div>
+        <div class="muted row"><span class="dot dot--pink"></span><span>Dà fe pdnj tite Sond</span></div>
+
+        <div class="muted row mt"><span class="dot dot--green"></span><span class="accent-cyan">Pro-Status</span></div>
+        <div class="muted row"><span class="tick">✓</span><span>Yenor det et netrta bardoer</span></div>
+      </section>
+    </aside>
+
+    <section class="rightcol">
+      <section class="card neon-frame neon-blue hero">
+        <div class="hero__title">
+          <span class="kpi">22</span>
+          <span class="accent-green" style="font-size:28px;font-weight:800;">Espace Professionel</span>
+        </div>
+        <p class="muted">
+          Lorsàtre pocikànus lieut pre sar nion:teunpte le de° nouvei men se dinclure.
+        </p>
+        <button class="btn btn--chip">Noifterr</button>
+      </section>
+
+      <section class="card neon-frame neon-blue stats-block">
+        <h3 class="h3">Stat Stats</h3>
+        <div class="stats-row">
+          <article class="stat neon-frame neon-blue">
+            <div class="stat__label">Parding</div>
+            <div class="stat__value">20%</div>
+            <div class="stat__sub muted">Doctan et mam eh<br>18 2S08s</div>
+          </article>
+
+          <article class="stat neon-frame neon-blue">
+            <div class="stat__label">Parding</div>
+            <div class="stat__value">29%</div>
+            <div class="stat__sub muted">Dostlàmet ptansàn<br>dortaat mutlos</div>
+          </article>
+
+          <article class="stat neon-frame neon-pink">
+            <div class="stat__label">Parding</div>
+            <div class="stat__value">69%</div>
+            <div class="stat__sub muted">Desitert et pam en<br>do tiàà tradides</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card neon-frame neon-green big">
+        <h2 class="h2 accent-pink">On cemioun-shadow</h2>
+        <p class="muted">
+          Ente¡cmions slore potlest conle maour grit de sire 0lne moment sle veurts.
+        </p>
+
+        <h3 class="h3 mt2">Stat Stats</h3>
+        <div class="stats-row">
+          <article class="stat neon-frame neon-blue">
+            <div class="stat__value">21800</div>
+            <div class="stat__sub muted">Tomlron ê madions</div>
+          </article>
+
+          <article class="stat neon-frame neon-pink">
+            <div class="stat__value">22500</div>
+            <div class="stat__sub muted">1Drenlorrt marlos</div>
+          </article>
+
+          <article class="stat neon-frame neon-green">
+            <div class="stat__value">16770</div>
+            <div class="stat__sub muted">Comiõon e madore</div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - Woof Academy Network</title>
+    <meta name="description" content="Découvrez notre sélection de produits pour chiens : accessoires, alimentation, jouets et équipements d'éducation.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/woof-header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="has-woof-header has-disclaimer">
+    <!-- DISCLAIMER -->
+    <div class="woof-disclaimer">
+        <strong>Woof Academy</strong> ne prend en charge ni l'éducation canine ni le coaching sportif. 
+        Le coaching est <strong>sous-traité</strong> à des professionnels indépendants certifiés.
+        <a href="CgvWoof.html">En savoir plus</a>
+    </div>
+
+    <!-- HEADER UNIFIÉ -->
+    <header class="woof-header">
+        <div class="woof-header__content">
+            <a href="index.html" class="woof-logo"><img src="https://www.genspark.ai/api/files/s/CMqdSq8G" alt="Woof Academy" class="woof-logo__img"><span class="woof-logo__text">Woof Academy</span></a>
+            <nav class="woof-nav" id="woofNav">
+                <a href="index.html" class="woof-nav__item"><i class="fas fa-home"></i><span class="nav-text">Accueil</span></a>
+                <a href="concept.html" class="woof-nav__item"><i class="fas fa-lightbulb"></i><span class="nav-text">Concept</span></a>
+                <a href="activites.html" class="woof-nav__item"><i class="fas fa-running"></i><span class="nav-text">Activités</span></a>
+                <a href="abonnements.html" class="woof-nav__item"><i class="fas fa-tags"></i><span class="nav-text">Abonnements</span></a>
+                <a href="planning-reservation.html" class="woof-nav__item"><i class="fas fa-calendar-alt"></i><span class="nav-text">Planning</span></a>
+                <div class="woof-nav__dropdown"><button class="woof-nav__item"><i class="fas fa-user-circle"></i><span class="nav-text">Espace</span><i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:4px;"></i></button><div class="woof-nav__dropdown-menu"><a href="Espace-Membre.html" class="woof-nav__dropdown-item"><i class="fas fa-user"></i> Mon Espace</a><a href="Espace-Pro.html" class="woof-nav__dropdown-item"><i class="fas fa-briefcase"></i> Espace Pro</a></div></div>
+                <a href="shop.html" class="woof-nav__item active"><i class="fas fa-store"></i><span class="nav-text">Boutique</span></a>
+                <a href="nous-contacter.html" class="woof-nav__item"><i class="fas fa-envelope"></i><span class="nav-text">Contact</span></a>
+            </nav>
+            <div class="woof-actions">
+                <div class="woof-cart-dog" id="woofCartDog"><a href="panier.html" class="woof-cart-dog__link" title="Mon Panier"><svg class="woof-dog" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="28" rx="14" ry="10" fill="currentColor" opacity="0.9"/><circle cx="24" cy="16" r="10" fill="currentColor"/><ellipse cx="16" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(-20 16 10)"/><ellipse cx="32" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(20 32 10)"/><circle cx="20" cy="14" r="2" fill="#070a0f"/><circle cx="28" cy="14" r="2" fill="#070a0f"/><ellipse cx="24" cy="20" rx="4" ry="3" fill="#1a1a2e"/><ellipse cx="24" cy="18" rx="1.5" ry="1" fill="#333"/><ellipse cx="18" cy="36" rx="3" ry="5" fill="currentColor"/><ellipse cx="30" cy="36" rx="3" ry="5" fill="currentColor"/><path d="M38 26 Q44 20 42 28 Q40 32 38 28" fill="currentColor"/></svg><svg class="woof-bone" viewBox="0 0 24 12" fill="currentColor"><path d="M4 6c-1.5 0-2.5-1-2.5-2.5S2.5 1 4 1s2.5 1 2.5 2.5c0 .5-.1 1-.3 1.3h11.6c-.2-.3-.3-.8-.3-1.3C17.5 2 18.5 1 20 1s2.5 1 2.5 2.5S21.5 6 20 6s-2.5 1-2.5 2.5S18.5 11 20 11s2.5-1 2.5-2.5c0-.5-.1-1-.3-1.3H10.6c.2.3.3.8.3 1.3C10.5 10 9.5 11 8 11s-2.5-1-2.5-2.5S6.5 6 8 6c.5 0 1 .1 1.3.3V5.7C9 5.9 8.5 6 8 6H4z"/></svg><span class="woof-cart-count" id="woofCartCount">0</span></a></div>
+                <div class="woof-ball" id="woofBall"></div>
+                <a href="login.html" class="woof-btn-login"><i class="fas fa-user"></i><span>Connexion</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+	
+	<!-- FILTRES -->
+<section class="section" style="background: var(--bg-secondary); padding-top: 0;">
+    <div class="container">
+        <div class="flex justify-between items-center mb-md">
+            <h2 class="section-title">Nos Produits</h2>
+            <div class="flex items-center gap-md">
+                <div class="flex gap-sm items-center">
+                    <label for="sortSelect" class="text-muted"><i class="fas fa-sort"></i> Trier par :</label>
+                    <select id="sortSelect" class="select">
+                        <option value="default">Par défaut</option>
+                        <option value="price-asc"><i class="fas fa-sort-amount-down-alt"></i> Prix croissant</option>
+                        <option value="price-desc"><i class="fas fa-sort-amount-up-alt"></i> Prix décroissant</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="tabs">
+                <button class="tab active" data-filter="all"><i class="fas fa-th"></i> Tous</button>
+                <button class="tab" data-filter="education"><i class="fas fa-book"></i> Éducation</button>
+                <button class="tab" data-filter="accessoires"><i class="fas fa-tag"></i> Accessoires</button>
+                <button class="tab" data-filter="jouets"><i class="fas fa-gamepad"></i> Jouets</button>
+                <button class="tab" data-filter="alimentation"><i class="fas fa-utensils"></i> Alimentation</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- PRODUITS -->
+        <section class="section" style="background: var(--bg-secondary); padding-top: 0;">
+            <div class="container">
+                <div class="grid grid-cols-4 md-grid-cols-2 sm-grid-cols-1" id="productsGrid">
+                    
+                    <!-- Produit 1 -->
+                    <div class="card card-cyan product-card" data-category="education" data-price="29.90">
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🎯
+                        </div>
+                        <span class="product-category">Éducation</span>
+                        <h4 class="product-title">Clicker Pro</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Clicker professionnel avec dragonne et son réglable.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-primary btn-sm" onclick="addProductToCart('clicker', 'Clicker Pro', 29.90)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 2 -->
+                    <div class="card card-green product-card" data-category="education" data-price="45.00">
+                        <span class="badge badge-magenta" style="position: absolute; top: 10px; right: 10px;">-20%</span>
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-green-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🦴
+                        </div>
+                        <span class="product-category">Éducation</span>
+                        <h4 class="product-title">Pochette Friandises</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Pochette pratique avec ceinture et compartiments multiples.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€ <span class="old-price">0,00€</span></span>
+                            <button class="btn btn-success btn-sm" onclick="addProductToCart('pochette', 'Pochette Friandises', 45.00)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 3 -->
+                    <div class="card card-magenta product-card" data-category="accessoires" data-price="65.00">
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-magenta-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🎒
+                        </div>
+                        <span class="product-category">Accessoires</span>
+                        <h4 class="product-title">Harnais Anti-Traction</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Harnais ergonomique avec points d'attache avant et dos.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-magenta btn-sm" onclick="addProductToCart('harnais', 'Harnais Anti-Traction', 65.00)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 4 -->
+                    <div class="card card-cyan product-card" data-category="accessoires" data-price="35.00">
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            📿
+                        </div>
+                        <span class="product-category">Accessoires</span>
+                        <h4 class="product-title">Longe 10m</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Longe de rappel 10 mètres, légère et résistante.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-primary btn-sm" onclick="addProductToCart('longe', 'Longe 10m', 35.00)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 5 -->
+                    <div class="card card-green product-card" data-category="jouets" data-price="18.90">
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-green-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🎾
+                        </div>
+                        <span class="product-category">Jouets</span>
+                        <h4 class="product-title">Balle Indestructible</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Balle ultra-résistante pour chiens destructeurs.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-success btn-sm" onclick="addProductToCart('balle', 'Balle Indestructible', 18.90)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 6 -->
+                    <div class="card card-magenta product-card" data-category="jouets" data-price="24.90">
+                        <span class="badge badge-cyan" style="position: absolute; top: 10px; right: 10px;">Nouveau</span>
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-magenta-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🧩
+                        </div>
+                        <span class="product-category">Jouets</span>
+                        <h4 class="product-title">Puzzle Kong</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Jouet d'occupation interactif niveau intermédiaire.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-magenta btn-sm" onclick="addProductToCart('kong', 'Puzzle Kong', 24.90)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 7 -->
+                    <div class="card card-cyan product-card" data-category="alimentation" data-price="42.00">
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🥩
+                        </div>
+                        <span class="product-category">Alimentation</span>
+                        <h4 class="product-title">Friandises Training</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Pack 500g de friandises naturelles pour l'éducation.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-primary btn-sm" onclick="addProductToCart('friandises', 'Friandises Training', 42.00)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produit 8 -->
+                    <div class="card card-green product-card" data-category="alimentation" data-price="55.00">
+                        <div class="product-image" style="background: linear-gradient(135deg, var(--neon-green-soft), var(--bg-tertiary)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🍖
+                        </div>
+                        <span class="product-category">Alimentation</span>
+                        <h4 class="product-title">Croquettes Premium</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Sac 5kg croquettes sans céréales, haute qualité.</p>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">0,00€</span>
+                            <button class="btn btn-success btn-sm" onclick="addProductToCart('croquettes', 'Croquettes Premium', 55.00)">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGINATION -->
+                <div class="flex justify-center mt-2xl">
+                    <div class="flex gap-sm">
+                        <button class="btn btn-secondary btn-sm"><i class="fas fa-chevron-left"></i></button>
+                        <button class="btn btn-primary btn-sm">1</button>
+                        <button class="btn btn-secondary btn-sm">2</button>
+                        <button class="btn btn-secondary btn-sm">3</button>
+                        <button class="btn btn-secondary btn-sm"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVANTAGES -->
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-cols-4 md-grid-cols-2 sm-grid-cols-1">
+                    <div class="text-center">
+                        <i class="fas fa-truck text-cyan" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Livraison Gratuite</h4>
+                        <p class="text-muted">Dès 50€ d'achat</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-undo text-green" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Retours Gratuits</h4>
+                        <p class="text-muted">Sous 30 jours</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-magenta" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Paiement Sécurisé</h4>
+                        <p class="text-muted">100% sécurisé</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-headset text-cyan" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Support Client</h4>
+                        <p class="text-muted">7j/7 par email</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🐕</div>
+                        <span>Woof Academy</span>
+                    </a>
+                    <p>Le réseau d'excellence pour l'éducation canine.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="Activites.html">Activités</a></li>
+                        <li><a href="Abonnements.html">Abonnements</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Boutique</h4>
+                    <ul class="footer-links">
+                        <li><a href="Shop.html">Notre Boutique</a></li>
+                        <li><a href="Shop-partenaires.html">Partenaires</a></li>
+                        <li><a href="Shop-global.html">Marketplace</a></li>
+                        <li><a href="Panier.html">Mon Panier</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope text-cyan"></i> shop@woofacademy.fr</li>
+                        <li><i class="fas fa-phone text-cyan"></i> 01 23 45 67 89</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Woof Academy Network. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <a href="CgvWoof.html">CGV</a>
+                    <a href="#">Mentions Légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .product-card {
+            position: relative;
+        }
+        
+        .product-card .product-image {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-md);
+        }
+    </style>
+
+    <script src="js/woof-header.js"></script>
+    <script>
+        // Cart Functions
+        function getCart() {
+            return JSON.parse(localStorage.getItem('woofCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('woofCart', JSON.stringify(cart));
+            if (window.WoofHeader) window.WoofHeader.updateWoofCart();
+        }
+
+        function addProductToCart(id, name, price) {
+            const cart = getCart();
+            const existingIndex = cart.findIndex(item => item.id === id);
+            
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    type: 'product'
+                });
+            }
+            
+            saveCart(cart);
+            showToast(`${name} ajouté au panier !`, 'success');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Filtres
+        const tabs = document.querySelectorAll('.tab');
+        const products = document.querySelectorAll('.product-card');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const filter = tab.dataset.filter;
+                
+                products.forEach(product => {
+                    if (filter === 'all' || product.dataset.category === filter) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Tri
+        document.getElementById('sortSelect').addEventListener('change', function() {
+            const productsArray = Array.from(products);
+            const grid = document.getElementById('productsGrid');
+            
+            productsArray.sort((a, b) => {
+                const priceA = parseFloat(a.dataset.price);
+                const priceB = parseFloat(b.dataset.price);
+                
+                switch(this.value) {
+                    case 'price-asc':
+                        return priceA - priceB;
+                    case 'price-desc':
+                        return priceB - priceA;
+                    default:
+                        return 0;
+                }
+            });
+            
+            productsArray.forEach(product => grid.appendChild(product));
+        });
+
+        // Init
+        updateCartBadge();
+    </script>
+</body>
+</html>

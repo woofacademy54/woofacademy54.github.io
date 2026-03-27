@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning & Réservation - Woof Academy Network</title>
+    <meta name="description" content="Consultez notre planning et réservez vos cours d'éducation canine en ligne.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/woof-header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER UNIFIÉ -->
+    <header class="woof-header">
+        <div class="woof-header__content">
+            <a href="index.html" class="woof-logo">
+                <img src="https://www.genspark.ai/api/files/s/CMqdSq8G" alt="Woof Academy" class="woof-logo__img">
+
+            </a>
+            <nav class="woof-nav" id="woofNav">
+                <a href="index.html" class="woof-nav__item"><i class="fas fa-home"></i><span class="nav-text">Accueil</span></a>
+                <a href="concept.html" class="woof-nav__item"><i class="fas fa-lightbulb"></i><span class="nav-text">Concept</span></a>
+                <a href="activites.html" class="woof-nav__item"><i class="fas fa-running"></i><span class="nav-text">Activités</span></a>
+                <a href="abonnements.html" class="woof-nav__item"><i class="fas fa-tags"></i><span class="nav-text">Abonnements</span></a>
+                <a href="planning-reservation.html" class="woof-nav__item active"><i class="fas fa-calendar-alt"></i><span class="nav-text">Planning</span></a>
+                <div class="woof-nav__dropdown">
+                    <button class="woof-nav__item"><i class="fas fa-user-circle"></i><span class="nav-text">Espace</span><i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:4px;"></i></button>
+                    <div class="woof-nav__dropdown-menu">
+                        <a href="espace-membre.html" class="woof-nav__dropdown-item"><i class="fas fa-user"></i> Mon Espace</a>
+                        <a href="espace-pro.html" class="woof-nav__dropdown-item"><i class="fas fa-briefcase"></i> Espace Pro</a>
+                    </div>
+                </div>
+                <a href="Shop.html" class="woof-nav__item"><i class="fas fa-store"></i><span class="nav-text">Boutique</span></a>
+                <a href="nous-contacter.html" class="woof-nav__item"><i class="fas fa-envelope"></i><span class="nav-text">Contact</span></a>
+            </nav>
+            <div class="woof-actions">
+                <div class="woof-cart-dog" id="woofCartDog">
+                    <a href="panier.html" class="woof-cart-dog__link" title="Mon Panier">
+                        <svg class="woof-dog" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="28" rx="14" ry="10" fill="currentColor" opacity="0.9"/><circle cx="24" cy="16" r="10" fill="currentColor"/><ellipse cx="16" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(-20 16 10)"/><ellipse cx="32" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(20 32 10)"/><circle cx="20" cy="14" r="2" fill="#070a0f"/><circle cx="28" cy="14" r="2" fill="#070a0f"/><ellipse cx="24" cy="20" rx="4" ry="3" fill="#1a1a2e"/><ellipse cx="24" cy="18" rx="1.5" ry="1" fill="#333"/><ellipse cx="18" cy="36" rx="3" ry="5" fill="currentColor"/><ellipse cx="30" cy="36" rx="3" ry="5" fill="currentColor"/><path d="M38 26 Q44 20 42 28 Q40 32 38 28" fill="currentColor"/></svg>
+                        <svg class="woof-bone" viewBox="0 0 24 12" fill="currentColor"><path d="M4 6c-1.5 0-2.5-1-2.5-2.5S2.5 1 4 1s2.5 1 2.5 2.5c0 .5-.1 1-.3 1.3h11.6c-.2-.3-.3-.8-.3-1.3C17.5 2 18.5 1 20 1s2.5 1 2.5 2.5S21.5 6 20 6s-2.5 1-2.5 2.5S18.5 11 20 11s2.5-1 2.5-2.5c0-.5-.1-1-.3-1.3H10.6c.2.3.3.8.3 1.3C10.5 10 9.5 11 8 11s-2.5-1-2.5-2.5S6.5 6 8 6c.5 0 1 .1 1.3.3V5.7C9 5.9 8.5 6 8 6H4z"/></svg>
+                        <span class="woof-cart-count" id="woofCartCount">0</span>
+                    </a>
+                </div>
+                <div class="woof-ball" id="woofBall"></div>
+                <a href="login.html" class="woof-btn-login"><i class="fas fa-user"></i><span>Connexion</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- CALENDRIER -->
+        <section class="section" style="background: var(--bg-secondary); padding-top: var(--space-xl);">
+            <div class="container">
+                <div class="grid grid-cols-3 md-grid-cols-1 gap-xl">
+                    
+                    <!-- CALENDRIER -->
+                    <div class="card card-cyan" style="grid-column: span 2;">
+                        <div class="calendar-header">
+                            <h3 id="currentMonth">Janvier 2026</h3>
+                            <div class="calendar-nav">
+                                <button class="btn btn-secondary btn-sm" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="btn btn-secondary btn-sm" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="calendar-grid" id="calendarGrid">
+                            <!-- Jours de la semaine -->
+                            <div class="calendar-day-header">Lun</div>
+                            <div class="calendar-day-header">Mar</div>
+                            <div class="calendar-day-header">Mer</div>
+                            <div class="calendar-day-header">Jeu</div>
+                            <div class="calendar-day-header">Ven</div>
+                            <div class="calendar-day-header">Sam</div>
+                            <div class="calendar-day-header">Dim</div>
+                            <!-- Jours générés dynamiquement -->
+                        </div>
+                        
+                        <div class="flex gap-lg mt-xl">
+                            <div class="flex items-center gap-sm">
+                                <div style="width: 12px; height: 12px; background: var(--neon-cyan); border-radius: 50%;"></div>
+                                <span class="text-muted">Disponible</span>
+                            </div>
+                            <div class="flex items-center gap-sm">
+                                <div style="width: 12px; height: 12px; background: var(--neon-magenta); border-radius: 50%;"></div>
+                                <span class="text-muted">Cours programmé</span>
+                            </div>
+                            <div class="flex items-center gap-sm">
+                                <div style="width: 12px; height: 12px; background: var(--neon-orange); border-radius: 50%;"></div>
+                                <span class="text-muted">Complet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FILTRES & LÉGENDE -->
+                    <div>
+                        <div class="card card-cyan mb-lg">
+                            <h4><i class="fas fa-filter text-cyan"></i> Filtrer par type</h4>
+                            <div class="flex flex-col gap-sm mt-md">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" checked data-filter="education">
+                                    <span>Éducation</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" checked data-filter="sport">
+                                    <span>Sports Canins</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" checked data-filter="comportement">
+                                    <span>Comportement</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" checked data-filter="stage">
+                                    <span>Stages</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="card card-green">
+                            <h4><i class="fas fa-info-circle text-green"></i> Informations</h4>
+                            <p class="text-muted" style="font-size: 0.9rem;">
+                                <strong>Horaires d'ouverture :</strong><br>
+                                Lun-Ven : 9h - 19h<br>
+                                Samedi : 9h - 17h<br>
+                                Dimanche : Fermé
+                            </p>
+                            <p class="text-muted mt-md" style="font-size: 0.9rem;">
+                                <strong>Annulation :</strong><br>
+                                Gratuite jusqu'à 24h avant
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CRÉNEAUX DU JOUR -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Créneaux du <span class="text-cyan" id="selectedDateTitle">23 Janvier 2026</span></h2>
+                </div>
+
+                <div class="grid grid-cols-2 md-grid-cols-1 gap-lg" id="slotsContainer">
+                    
+                    <!-- Créneaux Matin -->
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-sun text-cyan"></i> Matin</h4>
+                        
+                        <div class="slot-list mt-lg">
+                            <div class="slot-item" data-time="9:00" data-type="education">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>09:00 - 10:00</strong>
+                                        <p class="text-muted mb-0">Cours Chiots - Sophie M.</p>
+                                        <span class="badge badge-cyan">4 places</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" onclick="reserveSlot('9:00', 'Cours Chiots')">
+                                        Réserver
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="slot-item" data-time="10:00" data-type="education" style="margin-top: var(--space-md);">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>10:00 - 11:00</strong>
+                                        <p class="text-muted mb-0">Éducation Canine - Marc D.</p>
+                                        <span class="badge badge-cyan">2 places</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm" onclick="reserveSlot('10:00', 'Éducation Canine')">
+                                        Réserver
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="slot-item" data-time="11:00" data-type="sport" style="margin-top: var(--space-md);">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>11:00 - 12:00</strong>
+                                        <p class="text-muted mb-0">Agility Débutant - Lucas B.</p>
+                                        <span class="badge badge-green">6 places</span>
+                                    </div>
+                                    <button class="btn btn-success btn-sm" onclick="reserveSlot('11:00', 'Agility Débutant')">
+                                        Réserver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Créneaux Après-midi -->
+                    <div class="card card-magenta">
+                        <h4><i class="fas fa-cloud-sun text-magenta"></i> Après-midi</h4>
+                        
+                        <div class="slot-list mt-lg">
+                            <div class="slot-item" data-time="14:00" data-type="comportement">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>14:00 - 15:00</strong>
+                                        <p class="text-muted mb-0">Groupe Réactivité - Dr. Marc</p>
+                                        <span class="badge badge-magenta">3 places</span>
+                                    </div>
+                                    <button class="btn btn-magenta btn-sm" onclick="reserveSlot('14:00', 'Groupe Réactivité')">
+                                        Réserver
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="slot-item" data-time="15:00" data-type="sport" style="margin-top: var(--space-md);">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>15:00 - 16:00</strong>
+                                        <p class="text-muted mb-0">Canicross - Lucas B.</p>
+                                        <span class="badge badge-green">8 places</span>
+                                    </div>
+                                    <button class="btn btn-success btn-sm" onclick="reserveSlot('15:00', 'Canicross')">
+                                        Réserver
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="slot-item" data-time="16:00" data-type="education" style="margin-top: var(--space-md);">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>16:00 - 17:00</strong>
+                                        <p class="text-muted mb-0">Éducation Avancée - Sophie M.</p>
+                                        <span class="badge badge-orange" style="background: var(--neon-orange-glow); color: var(--neon-orange);">Complet</span>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm" disabled>
+                                        Complet
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="slot-item" data-time="17:00" data-type="sport" style="margin-top: var(--space-md);">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <strong>17:00 - 18:00</strong>
+                                        <p class="text-muted mb-0">Obé-Rythmée - Marie L.</p>
+                                        <span class="badge badge-green">5 places</span>
+                                    </div>
+                                    <button class="btn btn-success btn-sm" onclick="reserveSlot('17:00', 'Obé-Rythmée')">
+                                        Réserver
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCHAINS STAGES -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge"><i class="fas fa-calendar-check"></i> Événements</span>
+                    <h2 class="section-title">Prochains <span class="text-magenta">Stages</span></h2>
+                </div>
+
+                <div class="grid grid-cols-3 md-grid-cols-1">
+                    <div class="card card-cyan">
+                        <span class="badge badge-cyan mb-md">25-26 Janvier</span>
+                        <h4>Stage Intensif Éducation</h4>
+                        <p class="text-muted">2 jours pour poser les bases avec votre chien</p>
+                        <div class="flex justify-between items-center mt-lg">
+                            <span class="product-price">250€</span>
+                            <button class="btn btn-primary btn-sm" onclick="reserveSlot('stage', 'Stage Intensif')">
+                                S'inscrire
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-green">
+                        <span class="badge badge-green mb-md">1-5 Février</span>
+                        <h4>Semaine Agility</h4>
+                        <p class="text-muted">5 jours dédiés à l'agility tous niveaux</p>
+                        <div class="flex justify-between items-center mt-lg">
+                            <span class="product-price">450€</span>
+                            <button class="btn btn-success btn-sm" onclick="reserveSlot('stage', 'Semaine Agility')">
+                                S'inscrire
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-magenta">
+                        <span class="badge badge-magenta mb-md">15 Février</span>
+                        <h4>Journée Portes Ouvertes</h4>
+                        <p class="text-muted">Découvrez Woof Academy gratuitement</p>
+                        <div class="flex justify-between items-center mt-lg">
+                            <span class="product-price text-green">Gratuit</span>
+                            <button class="btn btn-magenta btn-sm" onclick="reserveSlot('event', 'Portes Ouvertes')">
+                                S'inscrire
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL RÉSERVATION -->
+    <div class="modal-overlay" id="reservationModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Confirmer la réservation</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription">Vous êtes sur le point de réserver...</p>
+                
+                <form id="reservationForm" class="mt-xl">
+                    <div class="form-group">
+                        <label class="form-label">Nom complet *</label>
+                        <input type="text" class="form-input" required placeholder="Votre nom">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Téléphone *</label>
+                        <input type="tel" class="form-input" required placeholder="06 12 34 56 78">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nom du chien *</label>
+                        <input type="text" class="form-input" required placeholder="Nom de votre compagnon">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" required>
+                            <span>J'accepte les <a href="CgvWoof.html">conditions générales</a></span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex gap-md mt-xl">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- DISCLAIMER -->
+    <div class="woof-disclaimer">
+        <strong>Woof Academy</strong> ne prend en charge ni l'éducation canine ni le coaching sportif. 
+        Le coaching est <strong>sous-traité</strong> à des professionnels indépendants certifiés.
+        <a href="CgvWoof.html">En savoir plus</a>
+    </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🐕</div>
+                        <span>Woof Academy</span>
+                    </a>
+                    <p>Le réseau d'excellence pour l'éducation canine. Rejoignez notre communauté de passionnés.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="Concept.html">Le Concept</a></li>
+                        <li><a href="Activites.html">Activités</a></li>
+                        <li><a href="Abonnements.html">Abonnements</a></li>
+                        <li><a href="Planning-reservation.html">Planning</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Espaces</h4>
+                    <ul class="footer-links">
+                        <li><a href="Espace-Membre.html">Espace Membre</a></li>
+                        <li><a href="Espace-Pro.html">Espace Pro</a></li>
+                        <li><a href="Shop.html">Boutique</a></li>
+                        <li><a href="admin-config.html">Administration</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt text-cyan"></i> 123 Rue des Chiens, 75000 Paris</li>
+                        <li><i class="fas fa-phone text-cyan"></i> 01 23 45 67 89</li>
+                        <li><i class="fas fa-envelope text-cyan"></i> contact@woofacademy.fr</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Woof Academy Network. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <a href="CgvWoof.html">CGV</a>
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Politique de Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .slot-item {
+            padding: var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            border-left: 3px solid var(--neon-cyan);
+        }
+        
+        .slot-item[data-type="sport"] {
+            border-left-color: var(--neon-green);
+        }
+        
+        .slot-item[data-type="comportement"] {
+            border-left-color: var(--neon-magenta);
+        }
+        
+        @media (max-width: 1024px) {
+            .card[style*="grid-column: span 2"] {
+                grid-column: span 1;
+            }
+        }
+    </style>
+
+    <script src="js/woof-header.js"></script>
+    <script>
+        // Calendar
+        let currentDate = new Date();
+        let selectedDate = new Date();
+        
+        const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
+                           'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const monthDisplay = document.getElementById('currentMonth');
+            
+            // Clear days (keep headers)
+            while (grid.children.length > 7) {
+                grid.removeChild(grid.lastChild);
+            }
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            monthDisplay.textContent = `${monthNames[month]} ${year}`;
+            
+            // First day of month (0=Sunday)
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Adjust for Monday start (0=Monday)
+            const startDay = firstDay === 0 ? 6 : firstDay - 1;
+            
+            // Empty cells before first day
+            for (let i = 0; i < startDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day';
+                emptyCell.style.opacity = '0.3';
+                grid.appendChild(emptyCell);
+            }
+            
+            // Days of month
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                
+                const cellDate = new Date(year, month, day);
+                
+                // Today
+                if (cellDate.toDateString() === today.toDateString()) {
+                    dayCell.classList.add('today');
+                }
+                
+                // Has events (simulated)
+                if ([5, 10, 15, 20, 25].includes(day)) {
+                    dayCell.classList.add('has-event');
+                }
+                
+                // Click handler
+                dayCell.addEventListener('click', () => {
+                    selectedDate = new Date(year, month, day);
+                    document.getElementById('selectedDateTitle').textContent = 
+                        `${day} ${monthNames[month]} ${year}`;
+                    
+                    // Remove selected class from all
+                    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                    dayCell.classList.add('selected');
+                });
+                
+                grid.appendChild(dayCell);
+            }
+        }
+
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        renderCalendar();
+
+        // Reservation Modal
+        let currentReservation = {};
+
+        function reserveSlot(time, courseName) {
+            currentReservation = { time, courseName };
+            document.getElementById('modalTitle').textContent = `Réserver : ${courseName}`;
+            document.getElementById('modalDescription').textContent = 
+                `Vous êtes sur le point de réserver le cours "${courseName}" pour le ${document.getElementById('selectedDateTitle').textContent}.`;
+            document.getElementById('reservationModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('reservationModal').classList.remove('active');
+        }
+
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(`Réservation confirmée pour "${currentReservation.courseName}" ! Un email de confirmation vous sera envoyé.`);
+            closeModal();
+        });
+
+        // Close modal on outside click
+        document.getElementById('reservationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

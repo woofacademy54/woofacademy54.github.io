@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Woof Academy Network</title>
+    <meta name="description" content="Le marketplace Woof Academy : achetez et vendez du matériel d'éducation canine d'occasion entre membres.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/woof-header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+     <style>
+        /* ===== STYLES SPÉCIFIQUES INDEX - NOUVELLE MAQUETTE ===== */
+        
+        /* Header simplifié style maquette */
+        .header-new {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 12, 18, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.75rem 2rem;
+        }
+
+        .header-new .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-new .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .header-new .logo-img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .header-new .nav-pills {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .header-new .nav-pill {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #9ca3af;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .header-new .nav-pill:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .header-new .nav-pill.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER UNIFIÉ -->
+    <header class="woof-header">
+        <div class="woof-header__content">
+            <a href="index.html" class="woof-logo">
+                <img src="https://www.genspark.ai/api/files/s/CMqdSq8G" alt="Woof Academy" class="woof-logo__img">
+
+            </a>
+            <nav class="woof-nav" id="woofNav">
+                <a href="index.html" class="woof-nav__item"><i class="fas fa-home"></i><span class="nav-text">Accueil</span></a>
+                <a href="concept.html" class="woof-nav__item"><i class="fas fa-lightbulb"></i><span class="nav-text">Concept</span></a>
+                <a href="activites.html" class="woof-nav__item"><i class="fas fa-running"></i><span class="nav-text">Activités</span></a>
+                <a href="abonnements.html" class="woof-nav__item"><i class="fas fa-tags"></i><span class="nav-text">Abonnements</span></a>
+                <a href="planning-reservation.html" class="woof-nav__item active"><i class="fas fa-calendar-alt"></i><span class="nav-text">Planning</span></a>
+                <div class="woof-nav__dropdown">
+                    <button class="woof-nav__item"><i class="fas fa-user-circle"></i><span class="nav-text">Espace</span><i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:4px;"></i></button>
+                    <div class="woof-nav__dropdown-menu">
+                        <a href="espace-membre.html" class="woof-nav__dropdown-item"><i class="fas fa-user"></i> Mon Espace</a>
+                        <a href="espace-pro.html" class="woof-nav__dropdown-item"><i class="fas fa-briefcase"></i> Espace Pro</a>
+                    </div>
+                </div>
+                <a href="shop.html" class="woof-nav__item"><i class="fas fa-store"></i><span class="nav-text">Boutique</span></a>
+                <a href="nous-contacter.html" class="woof-nav__item"><i class="fas fa-envelope"></i><span class="nav-text">Contact</span></a>
+            </nav>
+            <div class="woof-actions">
+                <div class="woof-cart-dog" id="woofCartDog">
+                    <a href="panier.html" class="woof-cart-dog__link" title="Mon Panier">
+                        <svg class="woof-dog" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="28" rx="14" ry="10" fill="currentColor" opacity="0.9"/><circle cx="24" cy="16" r="10" fill="currentColor"/><ellipse cx="16" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(-20 16 10)"/><ellipse cx="32" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(20 32 10)"/><circle cx="20" cy="14" r="2" fill="#070a0f"/><circle cx="28" cy="14" r="2" fill="#070a0f"/><ellipse cx="24" cy="20" rx="4" ry="3" fill="#1a1a2e"/><ellipse cx="24" cy="18" rx="1.5" ry="1" fill="#333"/><ellipse cx="18" cy="36" rx="3" ry="5" fill="currentColor"/><ellipse cx="30" cy="36" rx="3" ry="5" fill="currentColor"/><path d="M38 26 Q44 20 42 28 Q40 32 38 28" fill="currentColor"/></svg>
+                        <svg class="woof-bone" viewBox="0 0 24 12" fill="currentColor"><path d="M4 6c-1.5 0-2.5-1-2.5-2.5S2.5 1 4 1s2.5 1 2.5 2.5c0 .5-.1 1-.3 1.3h11.6c-.2-.3-.3-.8-.3-1.3C17.5 2 18.5 1 20 1s2.5 1 2.5 2.5S21.5 6 20 6s-2.5 1-2.5 2.5S18.5 11 20 11s2.5-1 2.5-2.5c0-.5-.1-1-.3-1.3H10.6c.2.3.3.8.3 1.3C10.5 10 9.5 11 8 11s-2.5-1-2.5-2.5S6.5 6 8 6c.5 0 1 .1 1.3.3V5.7C9 5.9 8.5 6 8 6H4z"/></svg>
+                        <span class="woof-cart-count" id="woofCartCount">0</span>
+                    </a>
+                </div>
+                <div class="woof-ball" id="woofBall"></div>
+                <a href="login.html" class="woof-btn-login"><i class="fas fa-user"></i><span>Connexion</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- BARRE DE RECHERCHE & ACTIONS -->
+        <section class="section" style="padding-top: var(--space-xl);">
+            <div class="container">
+                <!-- BARRE DE RECHERCHE & ACTIONS -->
+                <div class="flex justify-between items-center flex-wrap gap-lg mb-xl">
+                    <div class="flex gap-md" style="flex: 1; max-width: 500px;">
+                        <input type="text" class="form-input" placeholder="Rechercher un article..." id="searchInput">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-success" onclick="openPostModal()">
+                        <i class="fas fa-plus"></i> Déposer une annonce
+                    </button>
+                </div>
+
+                <!-- FILTRES -->
+                <div class="tabs" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+                    <button class="tab active" data-filter="all">Tout</button>
+                    <button class="tab" data-filter="materiel">Matériel</button>
+                    <button class="tab" data-filter="accessoires">Accessoires</button>
+                    <button class="tab" data-filter="agility">Agility</button>
+                    <button class="tab" data-filter="livres">Livres</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ANNONCES -->
+        <section class="section" style="background: var(--bg-secondary); padding-top: 0;">
+            <div class="container">
+                <div class="grid grid-cols-3 md-grid-cols-2 sm-grid-cols-1" id="listingsGrid">
+                    
+                    <!-- Annonce 1 -->
+                    <div class="card card-cyan listing-card" data-category="agility">
+                        <div class="listing-image" style="background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); height: 200px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-md);">
+                            🏃
+                        </div>
+                        <div class="flex justify-between items-start mb-sm">
+                            <span class="badge badge-cyan">Agility</span>
+                            <span class="text-muted" style="font-size: 0.8rem;">Il y a 2h</span>
+                        </div>
+                        <h4>Kit Haies Agility x6</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">6 haies réglables en hauteur, état neuf. Utilisé 2 fois seulement.</p>
+                        <div class="flex items-center gap-sm mb-md">
+                            <div class="member-avatar" style="width: 30px; height: 30px; font-size: 0.9rem;">👩</div>
+                            <span class="text-muted" style="font-size: 0.85rem;">Marie D. - Lyon</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="product-price">85€</span>
+                            <button class="btn btn-primary btn-sm" onclick="contactSeller('marie')">
+                                <i class="fas fa-envelope"></i> Contacter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Annonce 2 -->
+                    <div class="card card-green listing-card" data-category="accessoires">
+                        <span class="badge badge-magenta" style="position: absolute; top: 10px; right: 10px;">Négociable</span>
+                        <div class="listing-image" style="background: linear-gradient(135deg, var(--neon-green-soft), var(--bg-tertiary)); height: 200px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-md);">
+                            🎒
+                        </div>
+                        <div class="flex justify-between items-start mb-sm">
+                            <span class="badge badge-green">Accessoires</span>
+                            <span class="text-muted" style="font-size: 0.8rem;">Il y a 5h</span>
+                        </div>
+                        <h4>Harnais Ruffwear M</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Harnais Front Range taille M, couleur rouge. Très bon état.</p>
+                        <div class="flex items-center gap-sm mb-md">
+                            <div class="member-avatar" style="width: 30px; height: 30px; font-size: 0.9rem;">👨</div>
+                            <span class="text-muted" style="font-size: 0.85rem;">Thomas L. - Paris</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="product-price">35€</span>
+                            <button class="btn btn-success btn-sm" onclick="contactSeller('thomas')">
+                                <i class="fas fa-envelope"></i> Contacter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Annonce 3 -->
+                    <div class="card card-magenta listing-card" data-category="livres">
+                        <div class="listing-image" style="background: linear-gradient(135deg, var(--neon-magenta-soft), var(--bg-tertiary)); height: 200px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-md);">
+                            📚
+                        </div>
+                        <div class="flex justify-between items-start mb-sm">
+                            <span class="badge badge-magenta">Livres</span>
+                            <span class="text-muted" style="font-size: 0.8rem;">Hier</span>
+                        </div>
+                        <h4>Lot 5 Livres Éducation</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">5 livres sur l'éducation positive. Auteurs : Dehasse, Overall, McConnell.</p>
+                        <div class="flex items-center gap-sm mb-md">
+                            <div class="member-avatar" style="width: 30px; height: 30px; font-size: 0.9rem;">👩</div>
+                            <span class="text-muted" style="font-size: 0.85rem;">Sophie M. - Bordeaux</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="product-price">45€</span>
+                            <button class="btn btn-magenta btn-sm" onclick="contactSeller('sophie')">
+                                <i class="fas fa-envelope"></i> Contacter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Annonce 4 -->
+                    <div class="card card-cyan listing-card" data-category="materiel">
+                        <div class="listing-image" style="background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); height: 200px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-md);">
+                            🎯
+                        </div>
+                        <div class="flex justify-between items-start mb-sm">
+                            <span class="badge badge-cyan">Matériel</span>
+                            <span class="text-muted" style="font-size: 0.8rem;">Il y a 2j</span>
+                        </div>
+                        <h4>Lot Clickers + Pochette</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">3 clickers différents + pochette à friandises. Parfait pour débuter.</p>
+                        <div class="flex items-center gap-sm mb-md">
+                            <div class="member-avatar" style="width: 30px; height: 30px; font-size: 0.9rem;">👨</div>
+                            <span class="text-muted" style="font-size: 0.85rem;">Pierre G. - Toulouse</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="product-price">25€</span>
+                            <button class="btn btn-primary btn-sm" onclick="contactSeller('pierre')">
+                                <i class="fas fa-envelope"></i> Contacter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Annonce 5 -->
+                    <div class="card card-green listing-card" data-category="agility">
+                        <div class="listing-image" style="background: linear-gradient(135deg, var(--neon-green-soft), var(--bg-tertiary)); height: 200px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-md);">
+                            🎪
+                        </div>
+                        <div class="flex justify-between items-start mb-sm">
+                            <span class="badge badge-green">Agility</span>
+                            <span class="text-muted" style="font-size: 0.8rem;">Il y a 3j</span>
+                        </div>
+                        <h4>Tunnel Agility 5m</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Tunnel souple 5 mètres avec piquets de fixation. Bon état général.</p>
+                        <div class="flex items-center gap-sm mb-md">
+                            <div class="member-avatar" style="width: 30px; height: 30px; font-size: 0.9rem;">👩</div>
+                            <span class="text-muted" style="font-size: 0.85rem;">Claire B. - Nantes</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="product-price">60€</span>
+                            <button class="btn btn-success btn-sm" onclick="contactSeller('claire')">
+                                <i class="fas fa-envelope"></i> Contacter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Annonce 6 -->
+                    <div class="card card-magenta listing-card" data-category="accessoires">
+                        <span class="badge badge-green" style="position: absolute; top: 10px; right: 10px;">Comme neuf</span>
+                        <div class="listing-image" style="background: linear-gradient(135deg, var(--neon-magenta-soft), var(--bg-tertiary)); height: 200px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 4rem; margin-bottom: var(--space-md);">
+                            📿
+                        </div>
+                        <div class="flex justify-between items-start mb-sm">
+                            <span class="badge badge-magenta">Accessoires</span>
+                            <span class="text-muted" style="font-size: 0.8rem;">Il y a 4j</span>
+                        </div>
+                        <h4>Longe Biothane 15m</h4>
+                        <p class="text-muted" style="font-size: 0.85rem;">Longe biothane noire 15m, imperméable. Utilisée 1 mois.</p>
+                        <div class="flex items-center gap-sm mb-md">
+                            <div class="member-avatar" style="width: 30px; height: 30px; font-size: 0.9rem;">👨</div>
+                            <span class="text-muted" style="font-size: 0.85rem;">Marc D. - Lille</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="product-price">40€</span>
+                            <button class="btn btn-magenta btn-sm" onclick="contactSeller('marc')">
+                                <i class="fas fa-envelope"></i> Contacter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGINATION -->
+                <div class="flex justify-center mt-2xl">
+                    <div class="flex gap-sm">
+                        <button class="btn btn-secondary btn-sm"><i class="fas fa-chevron-left"></i></button>
+                        <button class="btn btn-primary btn-sm">1</button>
+                        <button class="btn btn-secondary btn-sm">2</button>
+                        <button class="btn btn-secondary btn-sm">3</button>
+                        <button class="btn btn-secondary btn-sm"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFO SECTION -->
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-cols-3 md-grid-cols-1">
+                    <div class="card card-cyan text-center">
+                        <i class="fas fa-shield-alt text-cyan" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Transactions Sécurisées</h4>
+                        <p class="text-muted">Tous les vendeurs sont des membres vérifiés de la communauté Woof Academy.</p>
+                    </div>
+                    <div class="card card-green text-center">
+                        <i class="fas fa-comments text-green" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Messagerie Intégrée</h4>
+                        <p class="text-muted">Communiquez directement avec les vendeurs via notre messagerie sécurisée.</p>
+                    </div>
+                    <div class="card card-magenta text-center">
+                        <i class="fas fa-heart text-magenta" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Communauté</h4>
+                        <p class="text-muted">Donnez une seconde vie à votre matériel et faites des économies entre passionnés.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DÉPÔT ANNONCE -->
+    <div class="modal-overlay" id="postModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Déposer une annonce</h3>
+                <button class="modal-close" onclick="closePostModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="postForm">
+                    <div class="form-group">
+                        <label class="form-label">Titre de l'annonce *</label>
+                        <input type="text" class="form-input" required placeholder="Ex: Harnais Ruffwear taille M">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catégorie *</label>
+                        <select class="form-select" required>
+                            <option value="">Choisir une catégorie</option>
+                            <option value="materiel">Matériel</option>
+                            <option value="accessoires">Accessoires</option>
+                            <option value="agility">Agility</option>
+                            <option value="livres">Livres</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description *</label>
+                        <textarea class="form-textarea" required placeholder="Décrivez votre article, son état, etc."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prix (€) *</label>
+                        <input type="number" class="form-input" required placeholder="Ex: 50">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Localisation *</label>
+                        <input type="text" class="form-input" required placeholder="Ex: Paris">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" required>
+                            <span>J'accepte les <a href="CgvWoof.html">conditions du marketplace</a></span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex gap-md mt-xl">
+                        <button type="button" class="btn btn-secondary" onclick="closePostModal()">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Publier l'annonce</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🐕</div>
+                        <span>Woof Academy</span>
+                    </a>
+                    <p>Le réseau d'excellence pour l'éducation canine.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Boutique</h4>
+                    <ul class="footer-links">
+                        <li><a href="Shop.html">Notre Boutique</a></li>
+                        <li><a href="Shop-partenaires.html">Partenaires</a></li>
+                        <li><a href="Shop-global.html">Marketplace</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="Activites.html">Activités</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope text-cyan"></i> marketplace@woofacademy.fr</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Woof Academy Network. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <a href="CgvWoof.html">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .listing-card {
+            position: relative;
+        }
+    </style>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMain = document.getElementById('navMain');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMain.classList.toggle('active');
+        });
+
+        // Cart Badge - Dog with bone
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('woofCart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBtn = document.getElementById('cartBtn');
+            const cartCount = document.getElementById('cartCount');
+            if (cartBtn && cartCount) {
+                cartCount.textContent = totalItems;
+                if (totalItems > 0) {
+                    cartBtn.classList.add('has-items');
+                } else {
+                    cartBtn.classList.remove('has-items');
+                }
+            }
+        }
+        updateCartBadge();
+
+        // Filtres
+        const tabs = document.querySelectorAll('.tab');
+        const listings = document.querySelectorAll('.listing-card');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const filter = tab.dataset.filter;
+                
+                listings.forEach(listing => {
+                    if (filter === 'all' || listing.dataset.category === filter) {
+                        listing.style.display = 'block';
+                    } else {
+                        listing.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal
+        function openPostModal() {
+            document.getElementById('postModal').classList.add('active');
+        }
+
+        function closePostModal() {
+            document.getElementById('postModal').classList.remove('active');
+        }
+
+        document.getElementById('postModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePostModal();
+            }
+        });
+
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Annonce publiée avec succès ! Elle sera visible après modération.');
+            closePostModal();
+        });
+
+        // Contact Seller
+        function contactSeller(seller) {
+            alert(`Message envoyé à ${seller}. Vous recevrez une réponse par email.`);
+        }
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            listings.forEach(listing => {
+                const title = listing.querySelector('h4').textContent.toLowerCase();
+                const desc = listing.querySelector('p').textContent.toLowerCase();
+                if (title.includes(query) || desc.includes(query)) {
+                    listing.style.display = 'block';
+                } else {
+                    listing.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - Woof Academy Network</title>
+    <meta name="description" content="Votre panier Woof Academy. Finalisez vos achats et abonnements.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body class="has-disclaimer">
+    <!-- DISCLAIMER JURIDIQUE -->
+    <div class="disclaimer-banner">
+        <i class="fas fa-info-circle disclaimer-icon"></i>
+        <strong>Woof Academy</strong> ne prend en charge ni l'éducation canine ni le coaching sportif. 
+        Le coaching est <strong>sous-traité</strong> à des professionnels indépendants certifiés. 
+        <a href="CgvWoof.html">En savoir plus</a>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <img src="https://www.genspark.ai/api/files/s/CMqdSq8G" alt="Woof Academy Logo" class="logo-img">
+                <span>Woof Academy</span>
+            </a>
+            
+            <nav class="nav-main" id="navMain">
+                <a href="concept.html" class="nav-link">Concept</a>
+                <a href="activites.html" class="nav-link">Activités</a>
+                <a href="abonnements.html" class="nav-link">Abonnements</a>
+                <a href="planning-reservation.html" class="nav-link">Planning</a>
+                
+                <div class="dropdown">
+                    <a href="#" class="nav-link">Votre Espace <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="espace-membre.html" class="dropdown-item"><i class="fas fa-user"></i> Membre</a>
+                        <a href="espace-pro.html" class="dropdown-item"><i class="fas fa-briefcase"></i> Partenaires</a>
+                    </div>
+                </div>
+                
+                <a href="Shop.html" class="nav-link">Boutique</a>
+                <a href="nous-contacter.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="panier.html" class="btn-cart-dog has-items" id="cartBtn" title="Mon Panier" style="border-color: var(--neon-cyan);">
+                    <svg class="dog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2C8 2 5 5 5 8c0 1.5.5 3 1.5 4L4 14c-.5.5-.5 1.5 0 2l1.5 1.5c.5.5 1.5.5 2 0l1-1c1 .5 2 .5 3.5.5s2.5 0 3.5-.5l1 1c.5.5 1.5.5 2 0L20 16c.5-.5.5-1.5 0-2l-2.5-2c1-1 1.5-2.5 1.5-4 0-3-3-6-7-6z"/>
+                        <circle cx="9" cy="8" r="1.5" fill="currentColor"/>
+                        <circle cx="15" cy="8" r="1.5" fill="currentColor"/>
+                        <ellipse cx="12" cy="11" rx="2" ry="1.5" fill="currentColor"/>
+                    </svg>
+                    <svg class="bone-icon" viewBox="0 0 24 24" fill="var(--neon-magenta)">
+                        <path d="M4 12c-1.1 0-2-.9-2-2s.9-2 2-2 2-.9 2-2-.9-2-2-2c0-1.1.9-2 2-2s2 .9 2 2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2 0-1.1.9-2 2-2s2 .9 2 2c-1.1 0-2 .9-2 2s.9 2 2 2-2 .9-2 2 .9 2 2 2c0 1.1-.9 2-2 2s-2-.9-2-2c0-1.1-.9-2-2-2h-8c-1.1 0-2 .9-2 2 0 1.1-.9 2-2 2s-2-.9-2-2c1.1 0 2-.9 2-2z"/>
+                    </svg>
+                    <span class="cart-count-dog" id="cartCount">0</span>
+                </a>
+                <a href="login.html" class="btn btn-primary btn-sm">
+                    <i class="fas fa-user"></i> Connexion
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- CART CONTENT -->
+        <section class="section" style="background: var(--bg-secondary); padding-top: var(--space-xl);">
+            <div class="container">
+                <div class="grid grid-cols-3 md-grid-cols-1 gap-xl">
+                    
+                    <!-- LISTE ARTICLES -->
+                    <div style="grid-column: span 2;">
+                        <div class="card card-cyan" id="cartItems">
+                            <!-- Les articles seront générés dynamiquement -->
+                            <div class="text-center p-xl" id="emptyCart">
+                                <i class="fas fa-shopping-cart text-muted" style="font-size: 4rem; margin-bottom: var(--space-lg);"></i>
+                                <h3>Votre panier est vide</h3>
+                                <p class="text-muted">Découvrez nos produits et abonnements pour votre compagnon</p>
+                                <div class="flex gap-md justify-center mt-xl">
+                                    <a href="Shop.html" class="btn btn-primary">
+                                        <i class="fas fa-store"></i> Boutique
+                                    </a>
+                                    <a href="Abonnements.html" class="btn btn-secondary">
+                                        <i class="fas fa-crown"></i> Abonnements
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div id="cartItemsList" style="display: none;">
+                                <!-- Items dynamiques -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RÉSUMÉ -->
+                    <div>
+                        <div class="card card-magenta" id="cartSummary" style="display: none;">
+                            <h3><i class="fas fa-receipt text-magenta"></i> Résumé</h3>
+                            
+                            <div class="mt-xl">
+                                <div class="flex justify-between items-center mb-md">
+                                    <span>Sous-total</span>
+                                    <span id="subtotal">0,00€</span>
+                                </div>
+                                <div class="flex justify-between items-center mb-md">
+                                    <span>Livraison</span>
+                                    <span id="shipping">Gratuite</span>
+                                </div>
+                                <div class="flex justify-between items-center mb-md" id="discountRow" style="display: none;">
+                                    <span>Réduction membre</span>
+                                    <span class="text-green" id="discount">-0,00€</span>
+                                </div>
+                                <hr style="border-color: rgba(255,255,255,0.1); margin: var(--space-lg) 0;">
+                                <div class="flex justify-between items-center">
+                                    <strong style="font-size: 1.2rem;">Total</strong>
+                                    <strong style="font-size: 1.5rem;" class="text-magenta" id="total">0,00€</strong>
+                                </div>
+                            </div>
+
+                            <!-- CODE PROMO -->
+                            <div class="mt-xl">
+                                <label class="form-label">Code promo</label>
+                                <div class="flex gap-sm">
+                                    <input type="text" class="form-input" id="promoCode" placeholder="WOOF20">
+                                    <button class="btn btn-secondary" onclick="applyPromo()">OK</button>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-magenta btn-block btn-lg mt-xl" onclick="checkout()">
+                                <i class="fas fa-lock"></i> Paiement sécurisé
+                            </button>
+
+                            <div class="flex items-center justify-center gap-md mt-lg text-muted" style="font-size: 0.85rem;">
+                                <i class="fab fa-cc-visa" style="font-size: 1.5rem;"></i>
+                                <i class="fab fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                                <i class="fab fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                                <i class="fab fa-cc-apple-pay" style="font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+
+                        <!-- AVANTAGES -->
+                        <div class="card card-cyan mt-lg">
+                            <h4><i class="fas fa-shield-alt text-cyan"></i> Garanties</h4>
+                            <ul style="list-style: none; margin-top: var(--space-md);">
+                                <li class="flex items-center gap-sm mb-md">
+                                    <i class="fas fa-check text-green"></i>
+                                    <span>Paiement 100% sécurisé</span>
+                                </li>
+                                <li class="flex items-center gap-sm mb-md">
+                                    <i class="fas fa-check text-green"></i>
+                                    <span>Livraison gratuite dès 50€</span>
+                                </li>
+                                <li class="flex items-center gap-sm mb-md">
+                                    <i class="fas fa-check text-green"></i>
+                                    <span>Retours gratuits sous 30 jours</span>
+                                </li>
+                                <li class="flex items-center gap-sm">
+                                    <i class="fas fa-check text-green"></i>
+                                    <span>Support client 7j/7</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUITS SUGGÉRÉS -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Vous Aimerez <span class="text-cyan">Aussi</span></h2>
+                </div>
+
+                <div class="grid grid-cols-4 md-grid-cols-2 sm-grid-cols-1">
+                    <div class="card card-cyan">
+                        <div style="height: 150px; background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: var(--space-md);">
+                            🎯
+                        </div>
+                        <h5>Clicker Pro</h5>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">29,90€</span>
+                            <button class="btn btn-primary btn-sm" onclick="addSuggestedItem('clicker', 'Clicker Pro', 29.90)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-green">
+                        <div style="height: 150px; background: linear-gradient(135deg, var(--neon-green-soft), var(--bg-tertiary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: var(--space-md);">
+                            🦴
+                        </div>
+                        <h5>Pochette Friandises</h5>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">45,00€</span>
+                            <button class="btn btn-success btn-sm" onclick="addSuggestedItem('pochette', 'Pochette Friandises', 45.00)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-magenta">
+                        <div style="height: 150px; background: linear-gradient(135deg, var(--neon-magenta-soft), var(--bg-tertiary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: var(--space-md);">
+                            🥩
+                        </div>
+                        <h5>Friandises Training</h5>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">42,00€</span>
+                            <button class="btn btn-magenta btn-sm" onclick="addSuggestedItem('friandises', 'Friandises Training', 42.00)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card card-cyan">
+                        <div style="height: 150px; background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: var(--space-md);">
+                            📿
+                        </div>
+                        <h5>Longe 10m</h5>
+                        <div class="flex justify-between items-center mt-md">
+                            <span class="product-price">35,00€</span>
+                            <button class="btn btn-primary btn-sm" onclick="addSuggestedItem('longe', 'Longe 10m', 35.00)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🐕</div>
+                        <span>Woof Academy</span>
+                    </a>
+                    <p>Le réseau d'excellence pour l'éducation canine.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="Shop.html">Boutique</a></li>
+                        <li><a href="Abonnements.html">Abonnements</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Aide</h4>
+                    <ul class="footer-links">
+                        <li><a href="Nous-contacter.html">Contact</a></li>
+                        <li><a href="CgvWoof.html">CGV</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope text-cyan"></i> shop@woofacademy.fr</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Woof Academy Network. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMain = document.getElementById('navMain');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMain.classList.toggle('active');
+        });
+
+        // Cart Functions
+        function getCart() {
+            return JSON.parse(localStorage.getItem('woofCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('woofCart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        function updateCartBadge() {
+            const cart = getCart();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBtn = document.getElementById('cartBtn');
+            const cartCount = document.getElementById('cartCount');
+            if (cartBtn && cartCount) {
+                cartCount.textContent = totalItems;
+                if (totalItems > 0) {
+                    cartBtn.classList.add('has-items');
+                } else {
+                    cartBtn.classList.remove('has-items');
+                }
+            }
+        }
+
+        function renderCart() {
+            const cart = getCart();
+            const emptyCart = document.getElementById('emptyCart');
+            const cartItemsList = document.getElementById('cartItemsList');
+            const cartSummary = document.getElementById('cartSummary');
+
+            if (cart.length === 0) {
+                emptyCart.style.display = 'block';
+                cartItemsList.style.display = 'none';
+                cartSummary.style.display = 'none';
+                return;
+            }
+
+            emptyCart.style.display = 'none';
+            cartItemsList.style.display = 'block';
+            cartSummary.style.display = 'block';
+
+            // Render items
+            cartItemsList.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--neon-cyan-soft), var(--bg-tertiary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        ${item.type === 'subscription' ? '👑' : '📦'}
+                    </div>
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p class="text-muted mb-0">${item.type === 'subscription' ? 'Abonnement' : 'Produit'}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <span class="product-price">${item.price.toFixed(2)}€</span>
+                        ${item.type !== 'subscription' ? `
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        ` : ''}
+                        <button class="btn btn-secondary btn-sm" onclick="removeItem(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal >= 50 ? 0 : 4.90;
+            const total = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2) + '€';
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Gratuite' : shipping.toFixed(2) + '€';
+            document.getElementById('total').textContent = total.toFixed(2) + '€';
+        }
+
+        function updateQuantity(index, change) {
+            const cart = getCart();
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            saveCart(cart);
+        }
+
+        function removeItem(index) {
+            const cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            showToast('Article supprimé du panier', 'info');
+        }
+
+        function addSuggestedItem(id, name, price) {
+            const cart = getCart();
+            const existingIndex = cart.findIndex(item => item.id === id);
+            
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    type: 'product'
+                });
+            }
+            
+            saveCart(cart);
+            showToast(`${name} ajouté au panier !`, 'success');
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promoCode').value.toUpperCase();
+            if (code === 'WOOF20' || code === 'WOOF15') {
+                document.getElementById('discountRow').style.display = 'flex';
+                const subtotal = parseFloat(document.getElementById('subtotal').textContent);
+                const discount = subtotal * 0.20;
+                document.getElementById('discount').textContent = '-' + discount.toFixed(2) + '€';
+                
+                const shipping = document.getElementById('shipping').textContent === 'Gratuite' ? 0 : 4.90;
+                const total = subtotal - discount + shipping;
+                document.getElementById('total').textContent = total.toFixed(2) + '€';
+                
+                showToast('Code promo appliqué ! -20%', 'success');
+            } else {
+                showToast('Code promo invalide', 'error');
+            }
+        }
+
+        function checkout() {
+            const cart = getCart();
+            if (cart.length === 0) {
+                showToast('Votre panier est vide', 'error');
+                return;
+            }
+            
+            alert('Redirection vers la page de paiement sécurisé...\n\n(Démo - Aucun paiement réel)');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'times-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Init
+        updateCartBadge();
+        renderCart();
+    </script>
+</body>
+</html>

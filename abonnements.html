@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonnements - Woof Academy Network</title>
+    <meta name="description" content="Découvrez nos formules d'abonnement : Découverte, Premium et VIP. Profitez de tarifs préférentiels et d'avantages exclusifs.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/woof-header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Rajdhani:wght@700&family=Play:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+	<style>
+	.pricing{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:15px; }
+    .price{ display:flex; flex-direction:column; gap:10px; }
+    .price .value{ font-family:'Play',sans-serif; font-weight:950; font-size: 28px; color: rgba(255,255,255,0.95); }
+	.featured{ border: 2px solid rgba(255,5,146,0.45); box-shadow: 0 0 24px rgba(255,5,146,0.16); }
+  </style>
+</head>
+<body> 
+        <!-- HEADER UNIFIÉ -->
+    <header class="woof-header">
+        <div class="woof-header__content">
+            <a href="index.html" class="woof-logo">
+                <img src="galerie/logohq.png" alt="Woof Academy" class="woof-logo__img">
+            </a>
+            
+            <nav class="woof-nav" id="woofNav">
+                <a href="index.html" class="woof-nav__item"><i class="fas fa-home"></i><span class="nav-text">Accueil</span></a>
+                <a href="concept.html" class="woof-nav__item"><i class="fas fa-lightbulb"></i><span class="nav-text">Concept</span></a>
+                <a href="activites.html" class="woof-nav__item"><i class="fas fa-running"></i><span class="nav-text">Activités</span></a>
+                <a href="abonnements.html" class="woof-nav__item active"><i class="fas fa-tags"></i><span class="nav-text">Abonnements</span></a>
+                <a href="planning-reservation.html" class="woof-nav__item"><i class="fas fa-calendar-alt"></i><span class="nav-text">Planning</span></a>
+                <div class="woof-nav__dropdown">
+                    <button class="woof-nav__item"><i class="fas fa-user-circle"></i><span class="nav-text">Espace</span><i class="fas fa-chevron-down" style="font-size:0.6rem;margin-left:4px;"></i></button>
+                    <div class="woof-nav__dropdown-menu">
+                        <a href="espace-membre.html" class="woof-nav__dropdown-item"><i class="fas fa-user"></i> Mon Espace</a>
+                        <a href="espace-pro.html" class="woof-nav__dropdown-item"><i class="fas fa-briefcase"></i> Espace Pro</a>
+                    </div>
+                </div>
+                <a href="shop.html" class="woof-nav__item"><i class="fas fa-store"></i><span class="nav-text">Boutique</span></a>
+                <a href="nous-contacter.html" class="woof-nav__item"><i class="fas fa-envelope"></i><span class="nav-text">Contact</span></a>
+            </nav>
+            
+            <div class="woof-actions">
+                <div class="woof-cart-dog" id="woofCartDog">
+                    <a href="panier.html" class="woof-cart-dog__link" title="Mon Panier">
+                        <svg class="woof-dog" viewBox="0 0 48 48" fill="none">
+                            <ellipse cx="24" cy="28" rx="14" ry="10" fill="currentColor" opacity="0.9"/>
+                            <circle cx="24" cy="16" r="10" fill="currentColor"/>
+                            <ellipse cx="16" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(-20 16 10)"/>
+                            <ellipse cx="32" cy="10" rx="4" ry="6" fill="currentColor" transform="rotate(20 32 10)"/>
+                            <circle cx="20" cy="14" r="2" fill="#070a0f"/>
+                            <circle cx="28" cy="14" r="2" fill="#070a0f"/>
+                            <ellipse cx="24" cy="20" rx="4" ry="3" fill="#1a1a2e"/>
+                            <ellipse cx="24" cy="18" rx="1.5" ry="1" fill="#333"/>
+                            <ellipse cx="18" cy="36" rx="3" ry="5" fill="currentColor"/>
+                            <ellipse cx="30" cy="36" rx="3" ry="5" fill="currentColor"/>
+                            <path d="M38 26 Q44 20 42 28 Q40 32 38 28" fill="currentColor"/>
+                        </svg>
+                        <svg class="woof-bone" viewBox="0 0 24 12" fill="currentColor">
+                            <path d="M4 6c-1.5 0-2.5-1-2.5-2.5S2.5 1 4 1s2.5 1 2.5 2.5c0 .5-.1 1-.3 1.3h11.6c-.2-.3-.3-.8-.3-1.3C17.5 2 18.5 1 20 1s2.5 1 2.5 2.5S21.5 6 20 6s-2.5 1-2.5 2.5S18.5 11 20 11s2.5-1 2.5-2.5c0-.5-.1-1-.3-1.3H10.6c.2.3.3.8.3 1.3C10.5 10 9.5 11 8 11s-2.5-1-2.5-2.5S6.5 6 8 6c.5 0 1 .1 1.3.3V5.7C9 5.9 8.5 6 8 6H4z"/>
+                        </svg>
+                        <span class="woof-cart-count" id="woofCartCount">0</span>
+                    </a>
+                </div>
+                <div class="woof-ball" id="woofBall"></div>
+                <a href="login.html" class="woof-btn-login"><i class="fas fa-user"></i><span>Connexion</span></a>
+            </div>
+        </div>
+    </header>
+	
+<main class="app-main">
+      <div class="main-scroll">
+        <div class="container">
+
+          <div class="section-head">
+            <div>
+              <div class="badge cyan">💳 offres</div>
+              <h1 class="section-title" style="margin-top:10px;">Abonnements</h1>
+            </div>
+          </div>
+
+          <section class="card glass-strong">
+            <h2 style="margin:0; font-family:'Play',sans-serif; font-weight:950;">Services a la seance</h2>
+            <div class="pricing" style="margin-top:12px;">
+              <div class="activity-card-container-cyan">
+                <strong>Initiation</strong>
+                <p>Seance obligatoire (45 min)</p>
+                <div class="value">25 €</div>
+				<a class="btn btn-primary" href="planning-reservation.html">Reserver</a>
+              </div>
+              <div class="activity-card-container-cyan">
+                <strong>Cours collectif</strong>
+                <p>Seance encadree</p>
+                <div class="value">25 €</div>
+                <a class="btn btn-primary" href="planning-reservation.html">Reserver</a>
+              </div>
+              <div class="activity-card-container-cyan">
+                <strong>Atelier thematique</strong>
+                <p>Stage specifique</p>
+                <div class="value">35 €</div>
+                <a class="btn btn-primary" href="planning-reservation.html">S'inscrire</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="card glass-strong">
+            <h2 style="margin:0; font-family:'Play',sans-serif; font-weight:950;">Acces parc & abonnements</h2>
+            <div class="pricing" style="margin-top:12px;">
+              <div class="activity-card-container-green">
+                <strong>A l'unite</strong>
+                <p>Parc & detente (1h)</p>
+                <div class="value">10 €</div>
+                <a class="btn btn-primary" href="planning-reservation.html">Choisir</a>
+              </div>
+              <div class="activity-card-container-green">
+                <strong>Parc + fitness</strong>
+                <p>Acces complet (1h30)</p>
+                <div class="value">18 €</div>
+                <a class="btn btn-primary" href="planning-reservation.html">Choisir</a>
+              </div>
+
+              <div class="activity-card-container-magenta">
+                <span class="badge badge-magenta md-md">Populaire • Choix de Woof</span>
+                <strong>Club Woof trimestriel</strong>
+                <p>Engagement 3 mois • Acces illimite + fitness offert</p>
+                <div class="value">30 € / mois</div>
+                <a class="btn btn-pink" href="login.html">Je m'abonne</a>
+              </div>
+
+              <div class="activity-card-container-cyan">
+                <strong>Club Woof mensuel</strong>
+                <p>Sans engagement</p>
+                <div class="flex justify-between items-center">
+				<span class="product-price">39 € <span>/ mois</span></div>
+                <a class="btn btn-primary" href="login.html">Choisir</a></span>
+              </div>
+
+              <div class="activity-card-container-yellow">
+                <span class="badge yellow">Annuel</span>
+                <strong>Annuel</strong>
+                <p>Solution serenite + avantages</p>
+                <div class="value">275–335 € / an</div>
+                <a class="btn btn-primary" href="login.html">Choisir</a>
+              </div>
+
+              <div class="activity-card-container-cyan">
+                <strong>Cartes 10 entrees</strong>
+                <p>Standard parc (90€) ou parc+fitness (150€)</p>
+                <div class="value">Des 90 €</div>
+                <a class="btn btn-primary" href="boutique.html">Voir en boutique</a>
+              </div>
+            </div>
+
+            <p style="margin-top:10px; font-size:12px; opacity:.75;">
+              Note: ton ancien fichier mentionnait des variantes (ex: 335€/an). [Source](https://www.genspark.ai/api/files/s/o7ifE2oR)
+            </p>
+          </section>
+
+        </div>
+      </div>
+
+        <!-- COMPARATIF -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge"><i class="fas fa-list-check"></i> Comparatif</span>
+                    <h2 class="section-title">Comparez les <span class="text-magenta">Formules</span></h2>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Fonctionnalités</th>
+                                <th class="text-center">Découverte</th>
+                                <th class="text-center">Premium</th>
+                                <th class="text-center">VIP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cours collectifs</td>
+                                <td class="text-center">4/mois</td>
+                                <td class="text-center text-magenta">Illimités</td>
+                                <td class="text-center text-green">Illimités</td>
+                            </tr>
+                            <tr>
+                                <td>Cours individuels</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center text-magenta">1/mois</td>
+                                <td class="text-center text-green">2/mois</td>
+                            </tr>
+                            <tr>
+                                <td>Accès événements</td>
+                                <td class="text-center"><i class="fas fa-check text-cyan"></i></td>
+                                <td class="text-center"><i class="fas fa-check text-magenta"></i> Prioritaire</td>
+                                <td class="text-center"><i class="fas fa-check text-green"></i> VIP</td>
+                            </tr>
+                            <tr>
+                                <td>Vidéos de formation</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center"><i class="fas fa-check text-magenta"></i></td>
+                                <td class="text-center"><i class="fas fa-check text-green"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Bilan comportemental</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center text-green">1/an</td>
+                            </tr>
+                            <tr>
+                                <td>Support</td>
+                                <td class="text-center">Email</td>
+                                <td class="text-center text-magenta">Prioritaire</td>
+                                <td class="text-center text-green">Hotline 24/7</td>
+                            </tr>
+                            <tr>
+                                <td>Réduction boutique</td>
+                                <td class="text-center">-10%</td>
+                                <td class="text-center text-magenta">-20%</td>
+                                <td class="text-center text-green">-30%</td>
+                            </tr>
+                            <tr>
+                                <td>Groupe privé</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center"><i class="fas fa-check text-magenta"></i></td>
+                                <td class="text-center"><i class="fas fa-check text-green"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Coaching personnalisé</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center">-</td>
+                                <td class="text-center"><i class="fas fa-check text-green"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVANTAGES -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge"><i class="fas fa-gift"></i> Avantages</span>
+                    <h2 class="section-title">Pourquoi <span class="text-cyan">S'abonner</span> ?</h2>
+                </div>
+
+                <div class="grid grid-cols-4 md-grid-cols-2 sm-grid-cols-1">
+                    <div class="card card-cyan text-center">
+                        <i class="fas fa-piggy-bank text-cyan" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Économies</h4>
+                        <p>Jusqu'à 40% d'économies par rapport aux tarifs unitaires</p>
+                    </div>
+                    
+                    <div class="card card-green text-center">
+                        <i class="fas fa-bolt text-green" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Flexibilité</h4>
+                        <p>Réservez vos créneaux en priorité selon vos disponibilités</p>
+                    </div>
+                    
+                    <div class="card card-magenta text-center">
+                        <i class="fas fa-users text-magenta" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Communauté</h4>
+                        <p>Accédez à notre groupe privé et nos événements exclusifs</p>
+                    </div>
+                    
+                    <div class="card card-cyan text-center">
+                        <i class="fas fa-chart-line text-cyan" style="font-size: 2.5rem; margin-bottom: var(--space-md);"></i>
+                        <h4>Progression</h4>
+                        <p>Suivi régulier de vos progrès avec reporting mensuel</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge"><i class="fas fa-question-circle"></i> FAQ</span>
+                    <h2 class="section-title">Questions <span class="text-magenta">Fréquentes</span></h2>
+                </div>
+
+                <div class="grid grid-cols-2 md-grid-cols-1 gap-lg">
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-question text-cyan"></i> Puis-je changer de formule ?</h4>
+                        <p>Oui, vous pouvez upgrader ou downgrader votre abonnement à tout moment. Le changement prend effet à la prochaine période de facturation.</p>
+                    </div>
+                    
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-question text-cyan"></i> Y a-t-il un engagement ?</h4>
+                        <p>Non, nos abonnements sont sans engagement. Vous pouvez résilier à tout moment depuis votre espace membre.</p>
+                    </div>
+                    
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-question text-cyan"></i> Les crédits sont-ils reportables ?</h4>
+                        <p>Les cours collectifs non utilisés ne sont pas reportés. Les cours individuels peuvent être reportés jusqu'à 3 mois.</p>
+                    </div>
+                    
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-question text-cyan"></i> Comment réserver mes cours ?</h4>
+                        <p>Depuis votre espace membre ou notre application mobile, vous pouvez réserver vos créneaux jusqu'à 2 semaines à l'avance.</p>
+                    </div>
+                    
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-question text-cyan"></i> Puis-je geler mon abonnement ?</h4>
+                        <p>Oui, vous pouvez mettre en pause votre abonnement jusqu'à 2 mois par an (vacances, maladie, etc.).</p>
+                    </div>
+                    
+                    <div class="card card-cyan">
+                        <h4><i class="fas fa-question text-cyan"></i> Les réductions sont-elles cumulables ?</h4>
+                        <p>Les réductions boutique ne sont pas cumulables avec les promotions en cours, mais peuvent être utilisées sur les articles en soldes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="container">
+                <div class="card card-magenta text-center" style="padding: var(--space-3xl);">
+                    <h2 class="section-title">Besoin d'Aide pour Choisir ?</h2>
+                    <p class="section-subtitle mb-xl">
+                        Notre équipe est là pour vous conseiller la formule la plus adaptée
+                    </p>
+                    <div class="flex justify-center gap-md flex-wrap">
+                        <a href="Nous-contacter.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-phone"></i> Nous contacter
+                        </a>
+                        <a href="Planning-reservation.html" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-calendar"></i> Essai gratuit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<!-- DISCLAIMER -->
+    <div class="woof-disclaimer">
+        <strong>Woof Academy</strong> ne prend en charge ni l'éducation canine ni le coaching sportif. 
+        Le coaching est <strong>sous-traité</strong> à des professionnels indépendants certifiés.
+        <a href="CgvWoof.html">En savoir plus</a>
+    </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🐕</div>
+                        <span>Woof Academy</span>
+                    </a>
+                    <p>Le réseau d'excellence pour l'éducation canine. Rejoignez notre communauté de passionnés.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="Concept.html">Le Concept</a></li>
+                        <li><a href="Activites.html">Activités</a></li>
+                        <li><a href="Abonnements.html">Abonnements</a></li>
+                        <li><a href="Planning-reservation.html">Planning</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Espaces</h4>
+                    <ul class="footer-links">
+                        <li><a href="Espace-Membre.html">Espace Membre</a></li>
+                        <li><a href="Espace-Pro.html">Espace Pro</a></li>
+                        <li><a href="Shop.html">Boutique</a></li>
+                        <li><a href="admin-config.html">Administration</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt text-cyan"></i> 123 Rue des Chiens, 75000 Paris</li>
+                        <li><i class="fas fa-phone text-cyan"></i> 01 23 45 67 89</li>
+                        <li><i class="fas fa-envelope text-cyan"></i> contact@woofacademy.fr</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Woof Academy Network. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <a href="CgvWoof.html">CGV</a>
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Politique de Confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--neon-cyan-glow);
+            border-radius: 30px;
+            transition: var(--transition-fast);
+        }
+        
+        .toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 3px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            transition: var(--transition-fast);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--neon-green-soft);
+            border-color: var(--neon-green);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(28px);
+            background: var(--neon-green);
+        }
+    </style>
+
+    <script src="js/woof-header.js"></script>
+    <script>
+
+        // Billing Toggle
+        const billingToggle = document.getElementById('billingToggle');
+        const monthlyPrices = document.querySelectorAll('.monthly-price');
+        const yearlyPrices = document.querySelectorAll('.yearly-price');
+        const monthlySuffixes = document.querySelectorAll('.monthly-suffix');
+        const yearlySuffixes = document.querySelectorAll('.yearly-suffix');
+        const monthlyLabel = document.getElementById('monthlyLabel');
+        const yearlyLabel = document.getElementById('yearlyLabel');
+
+        billingToggle.addEventListener('change', () => {
+            const isYearly = billingToggle.checked;
+            
+            monthlyPrices.forEach(el => el.style.display = isYearly ? 'none' : 'inline');
+            yearlyPrices.forEach(el => el.style.display = isYearly ? 'inline' : 'none');
+            monthlySuffixes.forEach(el => el.style.display = isYearly ? 'none' : 'inline');
+            yearlySuffixes.forEach(el => el.style.display = isYearly ? 'inline' : 'none');
+            
+            monthlyLabel.classList.toggle('text-cyan', !isYearly);
+            monthlyLabel.classList.toggle('text-muted', isYearly);
+            yearlyLabel.classList.toggle('text-green', isYearly);
+            yearlyLabel.classList.toggle('text-muted', !isYearly);
+        });
+
+        // Add to Cart
+        function addToCart(planName, price) {
+            const isYearly = billingToggle.checked;
+            const cart = JSON.parse(localStorage.getItem('woofCart')) || [];
+            
+            const planPrices = {
+                'decouverte': { monthly: 29, yearly: 279 },
+                'premium': { monthly: 59, yearly: 566 },
+                'vip': { monthly: 99, yearly: 950 }
+            };
+            
+            const finalPrice = isYearly ? planPrices[planName].yearly : planPrices[planName].monthly;
+            const suffix = isYearly ? '/an' : '/mois';
+            
+            const item = {
+                id: `abo-${planName}-${isYearly ? 'yearly' : 'monthly'}`,
+                name: `Abonnement ${planName.charAt(0).toUpperCase() + planName.slice(1)} ${isYearly ? 'Annuel' : 'Mensuel'}`,
+                price: finalPrice,
+                quantity: 1,
+                type: 'subscription'
+            };
+            
+            // Check if already in cart
+            const existingIndex = cart.findIndex(i => i.id === item.id);
+            if (existingIndex === -1) {
+                cart.push(item);
+            }
+            
+            localStorage.setItem('woofCart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            // Show confirmation
+            alert(`${item.name} ajouté au panier ! (${finalPrice}€${suffix})`);
+        }
+    </script>
+</body>
+</html>
